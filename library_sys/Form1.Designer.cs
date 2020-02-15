@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.grp_bookinfo = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txt_pubdate = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btn_admin = new System.Windows.Forms.Button();
             this.txt_isbn = new System.Windows.Forms.TextBox();
             this.txt_edit = new System.Windows.Forms.TextBox();
@@ -39,25 +41,24 @@
             this.txt_auth = new System.Windows.Forms.TextBox();
             this.txt_bookn = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.pic_book = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.grp_booklist = new System.Windows.Forms.GroupBox();
-            this.btn_search = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.grp_booksscan = new System.Windows.Forms.GroupBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.grp_booksava = new System.Windows.Forms.GroupBox();
+            this.btn_search = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btn_return = new System.Windows.Forms.Button();
             this.btn_borrow = new System.Windows.Forms.Button();
+            this.txt_barcode = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.grp_bookinfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_book)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grp_booklist.SuspendLayout();
             this.grp_booksscan.SuspendLayout();
             this.grp_booksava.SuspendLayout();
@@ -94,6 +95,9 @@
             // 
             // grp_bookinfo
             // 
+            this.grp_bookinfo.Controls.Add(this.pictureBox1);
+            this.grp_bookinfo.Controls.Add(this.txt_pubdate);
+            this.grp_bookinfo.Controls.Add(this.label7);
             this.grp_bookinfo.Controls.Add(this.btn_admin);
             this.grp_bookinfo.Controls.Add(this.txt_isbn);
             this.grp_bookinfo.Controls.Add(this.txt_edit);
@@ -101,7 +105,6 @@
             this.grp_bookinfo.Controls.Add(this.txt_auth);
             this.grp_bookinfo.Controls.Add(this.txt_bookn);
             this.grp_bookinfo.Controls.Add(this.label5);
-            this.grp_bookinfo.Controls.Add(this.pic_book);
             this.grp_bookinfo.Controls.Add(this.label4);
             this.grp_bookinfo.Controls.Add(this.label3);
             this.grp_bookinfo.Controls.Add(this.label2);
@@ -114,6 +117,33 @@
             this.grp_bookinfo.TabStop = false;
             this.grp_bookinfo.Text = "BookInfo";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(28, 310);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(140, 225);
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
+            // txt_pubdate
+            // 
+            this.txt_pubdate.Location = new System.Drawing.Point(78, 228);
+            this.txt_pubdate.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.txt_pubdate.Name = "txt_pubdate";
+            this.txt_pubdate.ReadOnly = true;
+            this.txt_pubdate.Size = new System.Drawing.Size(100, 20);
+            this.txt_pubdate.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(2, 231);
+            this.label7.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Publish Date:";
+            // 
             // btn_admin
             // 
             this.btn_admin.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -123,11 +153,12 @@
             this.btn_admin.TabIndex = 11;
             this.btn_admin.Text = "Admin Login";
             this.btn_admin.UseVisualStyleBackColor = true;
+            this.btn_admin.Click += new System.EventHandler(this.btn_admin_Click);
             // 
             // txt_isbn
             // 
-            this.txt_isbn.Location = new System.Drawing.Point(79, 265);
-            this.txt_isbn.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.txt_isbn.Location = new System.Drawing.Point(78, 185);
+            this.txt_isbn.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.txt_isbn.Name = "txt_isbn";
             this.txt_isbn.ReadOnly = true;
             this.txt_isbn.Size = new System.Drawing.Size(100, 20);
@@ -135,8 +166,8 @@
             // 
             // txt_edit
             // 
-            this.txt_edit.Location = new System.Drawing.Point(78, 202);
-            this.txt_edit.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.txt_edit.Location = new System.Drawing.Point(78, 142);
+            this.txt_edit.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.txt_edit.Name = "txt_edit";
             this.txt_edit.ReadOnly = true;
             this.txt_edit.Size = new System.Drawing.Size(100, 20);
@@ -144,8 +175,8 @@
             // 
             // txt_pub
             // 
-            this.txt_pub.Location = new System.Drawing.Point(78, 139);
-            this.txt_pub.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.txt_pub.Location = new System.Drawing.Point(78, 99);
+            this.txt_pub.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.txt_pub.Name = "txt_pub";
             this.txt_pub.ReadOnly = true;
             this.txt_pub.Size = new System.Drawing.Size(100, 20);
@@ -153,8 +184,8 @@
             // 
             // txt_auth
             // 
-            this.txt_auth.Location = new System.Drawing.Point(78, 76);
-            this.txt_auth.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.txt_auth.Location = new System.Drawing.Point(78, 56);
+            this.txt_auth.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.txt_auth.Name = "txt_auth";
             this.txt_auth.ReadOnly = true;
             this.txt_auth.Size = new System.Drawing.Size(100, 20);
@@ -163,7 +194,7 @@
             // txt_bookn
             // 
             this.txt_bookn.Location = new System.Drawing.Point(78, 13);
-            this.txt_bookn.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.txt_bookn.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.txt_bookn.Name = "txt_bookn";
             this.txt_bookn.ReadOnly = true;
             this.txt_bookn.Size = new System.Drawing.Size(100, 20);
@@ -172,39 +203,28 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 268);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.label5.Location = new System.Drawing.Point(1, 188);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.Size = new System.Drawing.Size(71, 13);
             this.label5.TabIndex = 5;
-            this.label5.Text = "ISBN-13:";
-            // 
-            // pic_book
-            // 
-            this.pic_book.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.pic_book.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pic_book.Location = new System.Drawing.Point(26, 328);
-            this.pic_book.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
-            this.pic_book.Name = "pic_book";
-            this.pic_book.Size = new System.Drawing.Size(152, 306);
-            this.pic_book.TabIndex = 4;
-            this.pic_book.TabStop = false;
+            this.label5.Text = "No. of pages:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 205);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.label4.Location = new System.Drawing.Point(25, 145);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 13);
+            this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Editon:";
+            this.label4.Text = "Subject:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 142);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.label3.Location = new System.Drawing.Point(19, 102);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 2;
@@ -213,8 +233,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 79);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.label2.Location = new System.Drawing.Point(31, 59);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 1;
@@ -223,12 +243,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 40, 3, 3);
+            this.label1.Location = new System.Drawing.Point(41, 16);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Book Name:";
+            this.label1.Text = "Title:";
             // 
             // grp_booklist
             // 
@@ -242,25 +262,10 @@
             this.grp_booklist.TabStop = false;
             this.grp_booklist.Text = "Book List";
             // 
-            // btn_search
-            // 
-            this.btn_search.Location = new System.Drawing.Point(110, 326);
-            this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(75, 20);
-            this.btn_search.TabIndex = 7;
-            this.btn_search.Text = "Search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(6, 326);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 6;
-            // 
             // grp_booksscan
             // 
             this.grp_booksscan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.grp_booksscan.Controls.Add(this.txt_barcode);
             this.grp_booksscan.Controls.Add(this.listBox2);
             this.grp_booksscan.Location = new System.Drawing.Point(3, 369);
             this.grp_booksscan.Margin = new System.Windows.Forms.Padding(2, 3, 3, 3);
@@ -272,11 +277,11 @@
             // 
             // listBox2
             // 
-            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(7, 20);
+            this.listBox2.Location = new System.Drawing.Point(3, 16);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(168, 277);
+            this.listBox2.Size = new System.Drawing.Size(179, 287);
             this.listBox2.TabIndex = 0;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
@@ -294,6 +299,15 @@
             this.grp_booksava.TabStop = false;
             this.grp_booksava.Text = "Available books:";
             // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(110, 326);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(75, 20);
+            this.btn_search.TabIndex = 7;
+            this.btn_search.Text = "Search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            // 
             // listBox1
             // 
             this.listBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -304,6 +318,13 @@
             this.listBox1.Size = new System.Drawing.Size(169, 290);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(6, 326);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 6;
             // 
             // tableLayoutPanel2
             // 
@@ -352,6 +373,18 @@
             this.btn_borrow.UseVisualStyleBackColor = false;
             this.btn_borrow.Visible = false;
             // 
+            // txt_barcode
+            // 
+            this.txt_barcode.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txt_barcode.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txt_barcode.Location = new System.Drawing.Point(3, 283);
+            this.txt_barcode.Name = "txt_barcode";
+            this.txt_barcode.Size = new System.Drawing.Size(179, 20);
+            this.txt_barcode.TabIndex = 8;
+            this.txt_barcode.Text = "Click here when scanning books...";
+            this.txt_barcode.Enter += new System.EventHandler(this.txt_barcode_Enter);
+            this.txt_barcode.Leave += new System.EventHandler(this.txt_barcode_Leave);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -361,15 +394,19 @@
             this.Controls.Add(this.grp_booklist);
             this.Controls.Add(this.grp_bookinfo);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.grp_bookinfo.ResumeLayout(false);
             this.grp_bookinfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_book)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grp_booklist.ResumeLayout(false);
             this.grp_booksscan.ResumeLayout(false);
+            this.grp_booksscan.PerformLayout();
             this.grp_booksava.ResumeLayout(false);
             this.grp_booksava.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -381,12 +418,10 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox grp_bookinfo;
-        private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pic_book;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txt_isbn;
         private System.Windows.Forms.TextBox txt_edit;
@@ -405,6 +440,10 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.Button btn_admin;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox txt_pubdate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txt_barcode;
     }
 }
 
