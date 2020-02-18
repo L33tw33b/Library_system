@@ -19,15 +19,9 @@ namespace library_sys
             InitializeComponent();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btn_borrow.Visible = true; btn_return.Visible = true;
         }
 
         private void btn_admin_Click(object sender, EventArgs e)
@@ -39,6 +33,9 @@ namespace library_sys
         {
             ActiveControl = txt_barcode;
             txt_barcode.Focus();
+            Form form1 = new Form();
+            form1.FormBorderStyle = FormBorderStyle.None;
+
         }
 
         private void txt_barcode_Enter(object sender, EventArgs e)
@@ -59,6 +56,21 @@ namespace library_sys
 
                 txt_barcode.ForeColor = Color.Silver;
             }
+        }
+
+        private void txt_barcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txt_barcode.SelectAll();
+                MessageBox.Show("key down");
+
+            }
+        }
+
+        private void txt_barcode_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
