@@ -13,16 +13,47 @@ namespace library_sys
 {
     public partial class Form1 : Form
     {
-        string connection = "@Server=localhost;Database=library;Uid=root;pwd=root;";
+        MySqlCommand cmd;
+        MySqlDataAdapter da;
+        DataTable dt;
+        MySqlConnection connection = new MySqlConnection(@"Server=localhost;Database=library;Uid=root;pwd=root;");
         public Form1()
         {
             InitializeComponent();
+
         }
 
-
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void fill_data(string sql, ListBox lst)
         {
+            try
+            {
+                connection.Open();
+                cmd = new MySqlCommand();
+                da = new MySqlDataAdapter();
+                dt = new DataTable();
+
+                cmd.Connection = connection;
+                cmd.CommandText = sql;
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+
+                lst.DataSource = dt;
+                lst.DisplayMember = "b_Title";
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                connection.Close();
+                da.Dispose();
+            }
+
         }
+
 
         private void btn_admin_Click(object sender, EventArgs e)
         {
@@ -33,8 +64,8 @@ namespace library_sys
         {
             ActiveControl = txt_barcode;
             txt_barcode.Focus();
-            Form form1 = new Form();
-            form1.FormBorderStyle = FormBorderStyle.None;
+            fill_data("SELECT b_Title FROM books", lst_avabooks);
+            lbl_result.Text = lst_avabooks.Items.Count.ToString() + " results";
 
         }
 
@@ -68,9 +99,16 @@ namespace library_sys
             }
         }
 
-        private void txt_barcode_TextChanged(object sender, EventArgs e)
+        private void btn_search_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form2 fm2 = new Form2();
+            fm2.Show();
         }
     }
 }

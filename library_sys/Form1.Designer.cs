@@ -31,10 +31,14 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.grp_bookinfo = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txt_logoff = new System.Windows.Forms.Button();
+            this.btn_admin = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txt_pubdate = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.btn_admin = new System.Windows.Forms.Button();
             this.txt_edit = new System.Windows.Forms.TextBox();
             this.txt_pub = new System.Windows.Forms.TextBox();
             this.txt_auth = new System.Windows.Forms.TextBox();
@@ -44,18 +48,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.grp_booklist = new System.Windows.Forms.GroupBox();
-            this.grp_booksscan = new System.Windows.Forms.GroupBox();
             this.txt_barcode = new System.Windows.Forms.TextBox();
+            this.grp_booksscan = new System.Windows.Forms.GroupBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.grp_booksava = new System.Windows.Forms.GroupBox();
-            this.btn_search = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.txt_search = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.grp_booksava = new System.Windows.Forms.GroupBox();
+            this.lbl_result = new System.Windows.Forms.Label();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.lst_avabooks = new System.Windows.Forms.ListBox();
+            this.txt_search = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.grp_bookinfo.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grp_booklist.SuspendLayout();
             this.grp_booksscan.SuspendLayout();
@@ -92,12 +96,12 @@
             // 
             // grp_bookinfo
             // 
+            this.grp_bookinfo.Controls.Add(this.groupBox1);
             this.grp_bookinfo.Controls.Add(this.textBox1);
             this.grp_bookinfo.Controls.Add(this.label5);
             this.grp_bookinfo.Controls.Add(this.pictureBox1);
             this.grp_bookinfo.Controls.Add(this.txt_pubdate);
             this.grp_bookinfo.Controls.Add(this.label7);
-            this.grp_bookinfo.Controls.Add(this.btn_admin);
             this.grp_bookinfo.Controls.Add(this.txt_edit);
             this.grp_bookinfo.Controls.Add(this.txt_pub);
             this.grp_bookinfo.Controls.Add(this.txt_auth);
@@ -113,6 +117,57 @@
             this.grp_bookinfo.TabIndex = 1;
             this.grp_bookinfo.TabStop = false;
             this.grp_bookinfo.Text = "BookInfo";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txt_logoff);
+            this.groupBox1.Controls.Add(this.btn_admin);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(3, 571);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(194, 100);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Options";
+            // 
+            // txt_logoff
+            // 
+            this.txt_logoff.Location = new System.Drawing.Point(9, 45);
+            this.txt_logoff.Name = "txt_logoff";
+            this.txt_logoff.Size = new System.Drawing.Size(179, 23);
+            this.txt_logoff.TabIndex = 12;
+            this.txt_logoff.Text = "Log off";
+            this.txt_logoff.UseVisualStyleBackColor = true;
+            this.txt_logoff.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btn_admin
+            // 
+            this.btn_admin.Location = new System.Drawing.Point(9, 74);
+            this.btn_admin.Name = "btn_admin";
+            this.btn_admin.Size = new System.Drawing.Size(179, 23);
+            this.btn_admin.TabIndex = 11;
+            this.btn_admin.Text = "Admin Login";
+            this.btn_admin.UseVisualStyleBackColor = true;
+            this.btn_admin.Click += new System.EventHandler(this.btn_admin_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(78, 228);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(29, 231);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Format:";
             // 
             // pictureBox1
             // 
@@ -140,17 +195,6 @@
             this.label7.Size = new System.Drawing.Size(69, 13);
             this.label7.TabIndex = 12;
             this.label7.Text = "Publish Year:";
-            // 
-            // btn_admin
-            // 
-            this.btn_admin.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btn_admin.Location = new System.Drawing.Point(3, 648);
-            this.btn_admin.Name = "btn_admin";
-            this.btn_admin.Size = new System.Drawing.Size(194, 23);
-            this.btn_admin.TabIndex = 11;
-            this.btn_admin.Text = "Admin Login";
-            this.btn_admin.UseVisualStyleBackColor = true;
-            this.btn_admin.Click += new System.EventHandler(this.btn_admin_Click);
             // 
             // txt_edit
             // 
@@ -243,6 +287,20 @@
             this.grp_booklist.TabStop = false;
             this.grp_booklist.Text = "Book List";
             // 
+            // txt_barcode
+            // 
+            this.txt_barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_barcode.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txt_barcode.Location = new System.Drawing.Point(742, 385);
+            this.txt_barcode.Name = "txt_barcode";
+            this.txt_barcode.Size = new System.Drawing.Size(389, 20);
+            this.txt_barcode.TabIndex = 8;
+            this.txt_barcode.Text = "Click here when scanning books...";
+            this.txt_barcode.Enter += new System.EventHandler(this.txt_barcode_Enter);
+            this.txt_barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_barcode_KeyDown);
+            this.txt_barcode.Leave += new System.EventHandler(this.txt_barcode_Leave);
+            // 
             // grp_booksscan
             // 
             this.grp_booksscan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -258,21 +316,6 @@
             this.grp_booksscan.TabStop = false;
             this.grp_booksscan.Text = "Scanned books:";
             // 
-            // txt_barcode
-            // 
-            this.txt_barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_barcode.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txt_barcode.Location = new System.Drawing.Point(742, 385);
-            this.txt_barcode.Name = "txt_barcode";
-            this.txt_barcode.Size = new System.Drawing.Size(389, 20);
-            this.txt_barcode.TabIndex = 8;
-            this.txt_barcode.Text = "Click here when scanning books...";
-            this.txt_barcode.TextChanged += new System.EventHandler(this.txt_barcode_TextChanged);
-            this.txt_barcode.Enter += new System.EventHandler(this.txt_barcode_Enter);
-            this.txt_barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_barcode_KeyDown);
-            this.txt_barcode.Leave += new System.EventHandler(this.txt_barcode_Leave);
-            // 
             // listBox2
             // 
             this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -284,50 +327,6 @@
             this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBox2.Size = new System.Drawing.Size(730, 277);
             this.listBox2.TabIndex = 0;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
-            // 
-            // grp_booksava
-            // 
-            this.grp_booksava.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grp_booksava.Controls.Add(this.btn_search);
-            this.grp_booksava.Controls.Add(this.listBox1);
-            this.grp_booksava.Controls.Add(this.txt_search);
-            this.grp_booksava.Location = new System.Drawing.Point(3, 16);
-            this.grp_booksava.Margin = new System.Windows.Forms.Padding(2, 3, 3, 3);
-            this.grp_booksava.Name = "grp_booksava";
-            this.grp_booksava.Size = new System.Drawing.Size(1137, 353);
-            this.grp_booksava.TabIndex = 4;
-            this.grp_booksava.TabStop = false;
-            this.grp_booksava.Text = "Available books:";
-            // 
-            // btn_search
-            // 
-            this.btn_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_search.Location = new System.Drawing.Point(1010, 328);
-            this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(75, 20);
-            this.btn_search.TabIndex = 7;
-            this.btn_search.Text = "Search";
-            this.btn_search.UseVisualStyleBackColor = true;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 19);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(730, 329);
-            this.listBox1.TabIndex = 0;
-            // 
-            // txt_search
-            // 
-            this.txt_search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_search.Location = new System.Drawing.Point(739, 327);
-            this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(265, 20);
-            this.txt_search.TabIndex = 6;
             // 
             // button1
             // 
@@ -340,24 +339,58 @@
             this.button1.Text = "Process books";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // grp_booksava
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 228);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 16;
+            this.grp_booksava.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grp_booksava.Controls.Add(this.lbl_result);
+            this.grp_booksava.Controls.Add(this.btn_search);
+            this.grp_booksava.Controls.Add(this.lst_avabooks);
+            this.grp_booksava.Controls.Add(this.txt_search);
+            this.grp_booksava.Location = new System.Drawing.Point(3, 16);
+            this.grp_booksava.Margin = new System.Windows.Forms.Padding(2, 3, 3, 3);
+            this.grp_booksava.Name = "grp_booksava";
+            this.grp_booksava.Size = new System.Drawing.Size(1137, 353);
+            this.grp_booksava.TabIndex = 4;
+            this.grp_booksava.TabStop = false;
+            this.grp_booksava.Text = "Available books:";
             // 
-            // label5
+            // lbl_result
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 231);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Format:";
+            this.lbl_result.AutoSize = true;
+            this.lbl_result.Location = new System.Drawing.Point(740, 294);
+            this.lbl_result.Name = "lbl_result";
+            this.lbl_result.Size = new System.Drawing.Size(0, 13);
+            this.lbl_result.TabIndex = 8;
+            // 
+            // btn_search
+            // 
+            this.btn_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_search.Location = new System.Drawing.Point(1010, 328);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(75, 20);
+            this.btn_search.TabIndex = 7;
+            this.btn_search.Text = "Search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // lst_avabooks
+            // 
+            this.lst_avabooks.FormattingEnabled = true;
+            this.lst_avabooks.Location = new System.Drawing.Point(3, 19);
+            this.lst_avabooks.Name = "lst_avabooks";
+            this.lst_avabooks.ScrollAlwaysVisible = true;
+            this.lst_avabooks.Size = new System.Drawing.Size(730, 329);
+            this.lst_avabooks.TabIndex = 0;
+            // 
+            // txt_search
+            // 
+            this.txt_search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_search.Location = new System.Drawing.Point(739, 327);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(265, 20);
+            this.txt_search.TabIndex = 6;
             // 
             // Form1
             // 
@@ -376,6 +409,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.grp_bookinfo.ResumeLayout(false);
             this.grp_bookinfo.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grp_booklist.ResumeLayout(false);
             this.grp_booklist.PerformLayout();
@@ -399,7 +433,7 @@
         private System.Windows.Forms.TextBox txt_auth;
         private System.Windows.Forms.TextBox txt_bookn;
         private System.Windows.Forms.GroupBox grp_booklist;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lst_avabooks;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox grp_booksava;
         private System.Windows.Forms.GroupBox grp_booksscan;
@@ -414,6 +448,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button txt_logoff;
+        private System.Windows.Forms.Label lbl_result;
     }
 }
 
