@@ -12,13 +12,15 @@ using MySql.Data.MySqlClient;
 namespace library_sys
 {
     public partial class Form1 : Form
-    {
+    {   
+        Form2 fm2 = new Form2();       
         MySqlCommand cmd;
         MySqlDataAdapter da;
         DataTable dt;
+        MySqlDataReader dr;
         MySqlConnection connection = new MySqlConnection(@"Server=localhost;Database=library;Uid=root;pwd=root;");
         public Form1()
-        {
+        { 
             InitializeComponent();
 
         }
@@ -31,6 +33,7 @@ namespace library_sys
                 cmd = new MySqlCommand();
                 da = new MySqlDataAdapter();
                 dt = new DataTable();
+                
 
                 cmd.Connection = connection;
                 cmd.CommandText = sql;
@@ -43,7 +46,7 @@ namespace library_sys
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("The book scanned does not exist in the Database, Please contact admin.\n"+ex.Message);
 
             }
             finally
@@ -93,22 +96,37 @@ namespace library_sys
         {
             if (e.KeyCode == Keys.Enter)
             {
-                txt_barcode.SelectAll();
-                MessageBox.Show("key down");
+                connection.Open();
+                cmd = new MySqlCommand("SELECT * FROM books WHERE b_Barcode = "+txt_barcode,connection);
+                dr = cmd.ExecuteReader();
+                dr.Read();
 
+                if ((dr["b_Borrowed_by"].ToString()) != null) {
+                    fill_data("SELECT b_Title FROM books WHERE b_Barcode ='" + txt_barcode.Text + "'", lst_return);
+                } else
+                {
+                    fill_data("SELECT b_Title FROM books WHERE b_Barcode ='" + txt_barcode.Text + "'", lst_borrow);
+                }
+                connection.Close();
             }
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-
+            lst_avabooks.Items.Clear();
+            fill_data("SELECT b_Title FROM books WHERE b_Barcode ='" + txt_search.Text + "'", lst_borrow);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form2 fm2 = new Form2();
+            
             fm2.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

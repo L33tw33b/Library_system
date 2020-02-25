@@ -36,7 +36,6 @@
             this.btn_admin = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txt_pubdate = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_edit = new System.Windows.Forms.TextBox();
@@ -50,17 +49,20 @@
             this.grp_booklist = new System.Windows.Forms.GroupBox();
             this.txt_barcode = new System.Windows.Forms.TextBox();
             this.grp_booksscan = new System.Windows.Forms.GroupBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lst_borrow = new System.Windows.Forms.ListBox();
+            this.btn_process = new System.Windows.Forms.Button();
             this.grp_booksava = new System.Windows.Forms.GroupBox();
             this.lbl_result = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
             this.lst_avabooks = new System.Windows.Forms.ListBox();
             this.txt_search = new System.Windows.Forms.TextBox();
+            this.lbl_welcome = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lst_return = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.grp_bookinfo.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grp_booklist.SuspendLayout();
             this.grp_booksscan.SuspendLayout();
             this.grp_booksava.SuspendLayout();
@@ -99,7 +101,6 @@
             this.grp_bookinfo.Controls.Add(this.groupBox1);
             this.grp_bookinfo.Controls.Add(this.textBox1);
             this.grp_bookinfo.Controls.Add(this.label5);
-            this.grp_bookinfo.Controls.Add(this.pictureBox1);
             this.grp_bookinfo.Controls.Add(this.txt_pubdate);
             this.grp_bookinfo.Controls.Add(this.label7);
             this.grp_bookinfo.Controls.Add(this.txt_edit);
@@ -168,14 +169,6 @@
             this.label5.Size = new System.Drawing.Size(42, 13);
             this.label5.TabIndex = 15;
             this.label5.Text = "Format:";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(28, 310);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(140, 225);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
             // 
             // txt_pubdate
             // 
@@ -277,7 +270,6 @@
             this.grp_booklist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grp_booklist.Controls.Add(this.txt_barcode);
             this.grp_booklist.Controls.Add(this.grp_booksscan);
             this.grp_booklist.Controls.Add(this.grp_booksava);
             this.grp_booklist.Location = new System.Drawing.Point(203, 51);
@@ -292,7 +284,7 @@
             this.txt_barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_barcode.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txt_barcode.Location = new System.Drawing.Point(742, 385);
+            this.txt_barcode.Location = new System.Drawing.Point(615, 42);
             this.txt_barcode.Name = "txt_barcode";
             this.txt_barcode.Size = new System.Drawing.Size(389, 20);
             this.txt_barcode.TabIndex = 8;
@@ -306,8 +298,12 @@
             this.grp_booksscan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grp_booksscan.Controls.Add(this.listBox2);
-            this.grp_booksscan.Controls.Add(this.button1);
+            this.grp_booksscan.Controls.Add(this.txt_barcode);
+            this.grp_booksscan.Controls.Add(this.label9);
+            this.grp_booksscan.Controls.Add(this.lst_return);
+            this.grp_booksscan.Controls.Add(this.label8);
+            this.grp_booksscan.Controls.Add(this.lst_borrow);
+            this.grp_booksscan.Controls.Add(this.btn_process);
             this.grp_booksscan.Location = new System.Drawing.Point(3, 369);
             this.grp_booksscan.Margin = new System.Windows.Forms.Padding(2, 3, 3, 3);
             this.grp_booksscan.Name = "grp_booksscan";
@@ -316,33 +312,35 @@
             this.grp_booksscan.TabStop = false;
             this.grp_booksscan.Text = "Scanned books:";
             // 
-            // listBox2
+            // lst_borrow
             // 
-            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lst_borrow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(3, 16);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.ScrollAlwaysVisible = true;
-            this.listBox2.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBox2.Size = new System.Drawing.Size(730, 277);
-            this.listBox2.TabIndex = 0;
+            this.lst_borrow.FormattingEnabled = true;
+            this.lst_borrow.Location = new System.Drawing.Point(3, 42);
+            this.lst_borrow.Name = "lst_borrow";
+            this.lst_borrow.ScrollAlwaysVisible = true;
+            this.lst_borrow.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lst_borrow.Size = new System.Drawing.Size(296, 251);
+            this.lst_borrow.TabIndex = 0;
             // 
-            // button1
+            // btn_process
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.btn_process.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(739, 266);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(392, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Process books";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_process.Location = new System.Drawing.Point(615, 270);
+            this.btn_process.Name = "btn_process";
+            this.btn_process.Size = new System.Drawing.Size(389, 23);
+            this.btn_process.TabIndex = 6;
+            this.btn_process.Text = "Process books";
+            this.btn_process.UseVisualStyleBackColor = true;
+            this.btn_process.Click += new System.EventHandler(this.button1_Click);
             // 
             // grp_booksava
             // 
             this.grp_booksava.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grp_booksava.Controls.Add(this.lbl_welcome);
             this.grp_booksava.Controls.Add(this.lbl_result);
             this.grp_booksava.Controls.Add(this.btn_search);
             this.grp_booksava.Controls.Add(this.lst_avabooks);
@@ -392,6 +390,44 @@
             this.txt_search.Size = new System.Drawing.Size(265, 20);
             this.txt_search.TabIndex = 6;
             // 
+            // lbl_welcome
+            // 
+            this.lbl_welcome.AutoSize = true;
+            this.lbl_welcome.Location = new System.Drawing.Point(743, 20);
+            this.lbl_welcome.Name = "lbl_welcome";
+            this.lbl_welcome.Size = new System.Drawing.Size(0, 13);
+            this.lbl_welcome.TabIndex = 9;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 19);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "To borrow:";
+            // 
+            // lst_return
+            // 
+            this.lst_return.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lst_return.FormattingEnabled = true;
+            this.lst_return.Location = new System.Drawing.Point(305, 42);
+            this.lst_return.Name = "lst_return";
+            this.lst_return.ScrollAlwaysVisible = true;
+            this.lst_return.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lst_return.Size = new System.Drawing.Size(296, 251);
+            this.lst_return.TabIndex = 8;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(302, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "To return:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,10 +446,9 @@
             this.grp_bookinfo.ResumeLayout(false);
             this.grp_bookinfo.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grp_booklist.ResumeLayout(false);
-            this.grp_booklist.PerformLayout();
             this.grp_booksscan.ResumeLayout(false);
+            this.grp_booksscan.PerformLayout();
             this.grp_booksava.ResumeLayout(false);
             this.grp_booksava.PerformLayout();
             this.ResumeLayout(false);
@@ -437,20 +472,23 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox grp_booksava;
         private System.Windows.Forms.GroupBox grp_booksscan;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lst_borrow;
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.Button btn_admin;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox txt_pubdate;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txt_barcode;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_process;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button txt_logoff;
         private System.Windows.Forms.Label lbl_result;
+        private System.Windows.Forms.Label lbl_welcome;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox lst_return;
+        private System.Windows.Forms.Label label8;
     }
 }
 

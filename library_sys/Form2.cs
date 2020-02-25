@@ -58,6 +58,7 @@ namespace library_sys
                     MessageBox.Show("Incorrect credentials");
                 }
                 else {
+                    Global.GlobalVar = txt_user.Text;
                     this.Hide();
                     Form1 fm1 = new Form1();
                     fm1.Show();

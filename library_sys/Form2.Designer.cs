@@ -124,11 +124,11 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_user;
         private System.Windows.Forms.TextBox txt_pass;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btn_log;
         private System.Windows.Forms.Button btn_reg;
+        private System.Windows.Forms.TextBox txt_user;
     }
 }
