@@ -47,19 +47,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.grp_booklist = new System.Windows.Forms.GroupBox();
-            this.txt_barcode = new System.Windows.Forms.TextBox();
             this.grp_booksscan = new System.Windows.Forms.GroupBox();
+            this.txt_barcode = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lst_return = new System.Windows.Forms.ListBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.lst_borrow = new System.Windows.Forms.ListBox();
             this.btn_process = new System.Windows.Forms.Button();
             this.grp_booksava = new System.Windows.Forms.GroupBox();
+            this.lbl_welcome = new System.Windows.Forms.Label();
             this.lbl_result = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
             this.lst_avabooks = new System.Windows.Forms.ListBox();
             this.txt_search = new System.Windows.Forms.TextBox();
-            this.lbl_welcome = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lst_return = new System.Windows.Forms.ListBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lst_search = new System.Windows.Forms.ListBox();
+            this.btn_clean = new System.Windows.Forms.Button();
+            this.btn_erase = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.grp_bookinfo.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -279,25 +283,13 @@
             this.grp_booklist.TabStop = false;
             this.grp_booklist.Text = "Book List";
             // 
-            // txt_barcode
-            // 
-            this.txt_barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_barcode.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txt_barcode.Location = new System.Drawing.Point(615, 42);
-            this.txt_barcode.Name = "txt_barcode";
-            this.txt_barcode.Size = new System.Drawing.Size(389, 20);
-            this.txt_barcode.TabIndex = 8;
-            this.txt_barcode.Text = "Click here when scanning books...";
-            this.txt_barcode.Enter += new System.EventHandler(this.txt_barcode_Enter);
-            this.txt_barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_barcode_KeyDown);
-            this.txt_barcode.Leave += new System.EventHandler(this.txt_barcode_Leave);
-            // 
             // grp_booksscan
             // 
             this.grp_booksscan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grp_booksscan.Controls.Add(this.btn_erase);
+            this.grp_booksscan.Controls.Add(this.btn_clean);
             this.grp_booksscan.Controls.Add(this.txt_barcode);
             this.grp_booksscan.Controls.Add(this.label9);
             this.grp_booksscan.Controls.Add(this.lst_return);
@@ -311,6 +303,50 @@
             this.grp_booksscan.TabIndex = 5;
             this.grp_booksscan.TabStop = false;
             this.grp_booksscan.Text = "Scanned books:";
+            // 
+            // txt_barcode
+            // 
+            this.txt_barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_barcode.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txt_barcode.Location = new System.Drawing.Point(615, 42);
+            this.txt_barcode.Name = "txt_barcode";
+            this.txt_barcode.Size = new System.Drawing.Size(170, 20);
+            this.txt_barcode.TabIndex = 8;
+            this.txt_barcode.Text = "Click here when scanning books...";
+            this.txt_barcode.Enter += new System.EventHandler(this.txt_barcode_Enter);
+            this.txt_barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_barcode_KeyDown);
+            this.txt_barcode.Leave += new System.EventHandler(this.txt_barcode_Leave);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(302, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "To return:";
+            // 
+            // lst_return
+            // 
+            this.lst_return.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lst_return.FormattingEnabled = true;
+            this.lst_return.Location = new System.Drawing.Point(305, 42);
+            this.lst_return.Name = "lst_return";
+            this.lst_return.ScrollAlwaysVisible = true;
+            this.lst_return.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lst_return.Size = new System.Drawing.Size(296, 251);
+            this.lst_return.TabIndex = 8;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 19);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "To borrow:";
             // 
             // lst_borrow
             // 
@@ -328,11 +364,11 @@
             // 
             this.btn_process.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_process.Location = new System.Drawing.Point(615, 270);
+            this.btn_process.Location = new System.Drawing.Point(615, 68);
             this.btn_process.Name = "btn_process";
-            this.btn_process.Size = new System.Drawing.Size(389, 23);
+            this.btn_process.Size = new System.Drawing.Size(513, 202);
             this.btn_process.TabIndex = 6;
-            this.btn_process.Text = "Process books";
+            this.btn_process.Text = "Borrow/Return books";
             this.btn_process.UseVisualStyleBackColor = true;
             this.btn_process.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -340,6 +376,8 @@
             // 
             this.grp_booksava.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grp_booksava.Controls.Add(this.label10);
+            this.grp_booksava.Controls.Add(this.lst_search);
             this.grp_booksava.Controls.Add(this.lbl_welcome);
             this.grp_booksava.Controls.Add(this.lbl_result);
             this.grp_booksava.Controls.Add(this.btn_search);
@@ -353,6 +391,14 @@
             this.grp_booksava.TabStop = false;
             this.grp_booksava.Text = "Available books:";
             // 
+            // lbl_welcome
+            // 
+            this.lbl_welcome.AutoSize = true;
+            this.lbl_welcome.Location = new System.Drawing.Point(743, 20);
+            this.lbl_welcome.Name = "lbl_welcome";
+            this.lbl_welcome.Size = new System.Drawing.Size(0, 13);
+            this.lbl_welcome.TabIndex = 9;
+            // 
             // lbl_result
             // 
             this.lbl_result.AutoSize = true;
@@ -364,7 +410,7 @@
             // btn_search
             // 
             this.btn_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_search.Location = new System.Drawing.Point(1010, 328);
+            this.btn_search.Location = new System.Drawing.Point(886, 328);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(75, 20);
             this.btn_search.TabIndex = 7;
@@ -378,55 +424,54 @@
             this.lst_avabooks.Location = new System.Drawing.Point(3, 19);
             this.lst_avabooks.Name = "lst_avabooks";
             this.lst_avabooks.ScrollAlwaysVisible = true;
-            this.lst_avabooks.Size = new System.Drawing.Size(730, 329);
+            this.lst_avabooks.Size = new System.Drawing.Size(296, 329);
             this.lst_avabooks.TabIndex = 0;
             // 
             // txt_search
             // 
             this.txt_search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_search.Location = new System.Drawing.Point(739, 327);
+            this.txt_search.Location = new System.Drawing.Point(615, 328);
             this.txt_search.Name = "txt_search";
             this.txt_search.Size = new System.Drawing.Size(265, 20);
             this.txt_search.TabIndex = 6;
             // 
-            // lbl_welcome
+            // lst_search
             // 
-            this.lbl_welcome.AutoSize = true;
-            this.lbl_welcome.Location = new System.Drawing.Point(743, 20);
-            this.lbl_welcome.Name = "lbl_welcome";
-            this.lbl_welcome.Size = new System.Drawing.Size(0, 13);
-            this.lbl_welcome.TabIndex = 9;
+            this.lst_search.FormattingEnabled = true;
+            this.lst_search.Location = new System.Drawing.Point(305, 31);
+            this.lst_search.Name = "lst_search";
+            this.lst_search.ScrollAlwaysVisible = true;
+            this.lst_search.Size = new System.Drawing.Size(296, 316);
+            this.lst_search.TabIndex = 10;
             // 
-            // label8
+            // btn_clean
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 19);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(58, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "To borrow:";
+            this.btn_clean.Location = new System.Drawing.Point(615, 270);
+            this.btn_clean.Name = "btn_clean";
+            this.btn_clean.Size = new System.Drawing.Size(513, 23);
+            this.btn_clean.TabIndex = 10;
+            this.btn_clean.Text = "Clear all items";
+            this.btn_clean.UseVisualStyleBackColor = true;
+            this.btn_clean.Click += new System.EventHandler(this.btn_clean_Click);
             // 
-            // lst_return
+            // btn_erase
             // 
-            this.lst_return.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lst_return.FormattingEnabled = true;
-            this.lst_return.Location = new System.Drawing.Point(305, 42);
-            this.lst_return.Name = "lst_return";
-            this.lst_return.ScrollAlwaysVisible = true;
-            this.lst_return.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.lst_return.Size = new System.Drawing.Size(296, 251);
-            this.lst_return.TabIndex = 8;
+            this.btn_erase.Location = new System.Drawing.Point(70, 13);
+            this.btn_erase.Name = "btn_erase";
+            this.btn_erase.Size = new System.Drawing.Size(75, 23);
+            this.btn_erase.TabIndex = 11;
+            this.btn_erase.Text = "Erase item";
+            this.btn_erase.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // label10
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(302, 19);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "To return:";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(302, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Serach result:";
             // 
             // Form1
             // 
@@ -489,6 +534,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox lst_return;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListBox lst_search;
+        private System.Windows.Forms.Button btn_clean;
+        private System.Windows.Forms.Button btn_erase;
+        private System.Windows.Forms.Label label10;
     }
 }
 

@@ -67,7 +67,7 @@ namespace library_sys
         {
             ActiveControl = txt_barcode;
             txt_barcode.Focus();
-            fill_data("SELECT b_Title FROM books", lst_avabooks);
+            fill_data("SELECT b_Title FROM books WHERE b_Borrowed_by IS NULL", lst_avabooks);
             lbl_result.Text = lst_avabooks.Items.Count.ToString() + " results";
 
         }
@@ -113,8 +113,8 @@ namespace library_sys
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            lst_avabooks.Items.Clear();
-            fill_data("SELECT b_Title FROM books WHERE b_Barcode ='" + txt_search.Text + "'", lst_borrow);
+            lst_search.Items.Clear();
+            fill_data("SELECT b_Title FROM books WHERE b_Title ='" + txt_search.Text + "' AND b_Borrowed_by IS NULL", lst_borrow);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -126,7 +126,24 @@ namespace library_sys
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int bor, ret;
+            bor = lst_borrow.Items.Count;
+            ret = lst_return.Items.Count;
+            if (MessageBox.Show($"You are about to borrow {bor} books and return {ret} books. Confirm?", "Books processing", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult)
+            {
 
+            }
+
+
+        }
+
+        private void btn_clean_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show($"You are about to clear all items in the scanned book lists. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult) 
+            {
+                lst_borrow.Items.Clear();
+                lst_return.Items.Clear();
+            }
         }
     }
 }
