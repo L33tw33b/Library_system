@@ -48,6 +48,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grp_booklist = new System.Windows.Forms.GroupBox();
             this.grp_booksscan = new System.Windows.Forms.GroupBox();
+            this.btn_renew = new System.Windows.Forms.Button();
+            this.btn_erase_ret = new System.Windows.Forms.Button();
             this.btn_erase_bor = new System.Windows.Forms.Button();
             this.btn_clean = new System.Windows.Forms.Button();
             this.txt_barcode = new System.Windows.Forms.TextBox();
@@ -64,8 +66,6 @@
             this.btn_search = new System.Windows.Forms.Button();
             this.lst_avabooks = new System.Windows.Forms.ListBox();
             this.txt_search = new System.Windows.Forms.TextBox();
-            this.btn_erase_ret = new System.Windows.Forms.Button();
-            this.btn_renew = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.grp_bookinfo.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -308,6 +308,28 @@
             this.grp_booksscan.TabStop = false;
             this.grp_booksscan.Text = "Scanned books:";
             // 
+            // btn_renew
+            // 
+            this.btn_renew.Location = new System.Drawing.Point(442, 14);
+            this.btn_renew.Name = "btn_renew";
+            this.btn_renew.Size = new System.Drawing.Size(75, 23);
+            this.btn_renew.TabIndex = 13;
+            this.btn_renew.Text = "Renew";
+            this.btn_renew.UseVisualStyleBackColor = true;
+            this.btn_renew.Visible = false;
+            this.btn_renew.Click += new System.EventHandler(this.btn_renew_Click);
+            // 
+            // btn_erase_ret
+            // 
+            this.btn_erase_ret.Location = new System.Drawing.Point(361, 14);
+            this.btn_erase_ret.Name = "btn_erase_ret";
+            this.btn_erase_ret.Size = new System.Drawing.Size(75, 23);
+            this.btn_erase_ret.TabIndex = 12;
+            this.btn_erase_ret.Text = "Erase item";
+            this.btn_erase_ret.UseVisualStyleBackColor = true;
+            this.btn_erase_ret.Visible = false;
+            this.btn_erase_ret.Click += new System.EventHandler(this.btn_erase_ret_Click);
+            // 
             // btn_erase_bor
             // 
             this.btn_erase_bor.Location = new System.Drawing.Point(70, 13);
@@ -316,10 +338,13 @@
             this.btn_erase_bor.TabIndex = 11;
             this.btn_erase_bor.Text = "Erase item";
             this.btn_erase_bor.UseVisualStyleBackColor = true;
+            this.btn_erase_bor.Visible = false;
             this.btn_erase_bor.Click += new System.EventHandler(this.btn_erase_bor_Click);
             // 
             // btn_clean
             // 
+            this.btn_clean.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_clean.Location = new System.Drawing.Point(615, 270);
             this.btn_clean.Name = "btn_clean";
             this.btn_clean.Size = new System.Drawing.Size(513, 23);
@@ -362,6 +387,7 @@
             this.lst_return.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lst_return.Size = new System.Drawing.Size(296, 251);
             this.lst_return.TabIndex = 8;
+            this.lst_return.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lst_return_MouseClick);
             // 
             // label8
             // 
@@ -383,6 +409,7 @@
             this.lst_borrow.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.lst_borrow.Size = new System.Drawing.Size(296, 251);
             this.lst_borrow.TabIndex = 0;
+            this.lst_borrow.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lst_borrow_MouseClick);
             // 
             // btn_process
             // 
@@ -477,26 +504,6 @@
             this.txt_search.Name = "txt_search";
             this.txt_search.Size = new System.Drawing.Size(265, 20);
             this.txt_search.TabIndex = 6;
-            // 
-            // btn_erase_ret
-            // 
-            this.btn_erase_ret.Location = new System.Drawing.Point(361, 14);
-            this.btn_erase_ret.Name = "btn_erase_ret";
-            this.btn_erase_ret.Size = new System.Drawing.Size(75, 23);
-            this.btn_erase_ret.TabIndex = 12;
-            this.btn_erase_ret.Text = "Erase item";
-            this.btn_erase_ret.UseVisualStyleBackColor = true;
-            this.btn_erase_ret.Click += new System.EventHandler(this.btn_erase_ret_Click);
-            // 
-            // btn_renew
-            // 
-            this.btn_renew.Location = new System.Drawing.Point(442, 14);
-            this.btn_renew.Name = "btn_renew";
-            this.btn_renew.Size = new System.Drawing.Size(75, 23);
-            this.btn_renew.TabIndex = 13;
-            this.btn_renew.Text = "Renew";
-            this.btn_renew.UseVisualStyleBackColor = true;
-            this.btn_renew.Click += new System.EventHandler(this.btn_renew_Click);
             // 
             // Form1
             // 

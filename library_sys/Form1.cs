@@ -185,7 +185,44 @@ namespace library_sys
             int i = lst_return.SelectedItems.Count;
             if (MessageBox.Show($"You are about to renew {i} books from the Return list. Confirm?", "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult)
             {
+                connection.Open();
+                cmd = new MySqlCommand("SELECT * FROM books");
+                dr = cmd.ExecuteReader();
+                dr.Read();
+                foreach (var listboxitems in lst_return.SelectedItems) {
+                    DateTime new_due_date = DateTime.ParseExact(dr["b_Due_Date"].ToString(),"YYYY-mm-dd H:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    new_due_date.AddDays(14);
+                    cmd = new MySqlCommand("UPDATE books SET b_Due_Date = " + new_due_date.ToString() + "WHERE b_Title =" + listboxitems + ";");
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
                 lst_return.SelectedItems.Clear();
+            }
+        }
+
+        private void lst_borrow_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lst_borrow.SelectedIndex != -1)
+            {
+                btn_erase_bor.Visible = true;
+            }
+            else 
+            {
+                btn_erase_bor.Visible = false;
+            }
+        }
+
+        private void lst_return_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lst_return.SelectedIndex != -1)
+            {
+                btn_erase_ret.Visible = true;
+                btn_renew.Visible = true;
+            }
+            else
+            {
+                btn_erase_ret.Visible = false;
+                btn_renew.Visible = false;
             }
         }
     }
