@@ -129,9 +129,25 @@ namespace library_sys
             int bor, ret;
             bor = lst_borrow.Items.Count;
             ret = lst_return.Items.Count;
+            DateTime due_date = DateTime.Today.AddDays(14);
+
             if (MessageBox.Show($"You are about to borrow {bor} books and return {ret} books. Confirm?", "Books processing", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult)
             {
 
+                connection.Open();
+                foreach(var listboxitem in lst_borrow.Items) 
+                {
+                    cmd = new MySqlCommand("UPDATE books SET b_Borrowed_by =" + Global.GlobalVar + "b_Due_Date = " + (due_date.ToString("YYYY-mm-dd H:mm:ss")) + "WHERE b_Title =" + listboxitem + ";");
+                    cmd.ExecuteNonQuery();
+                }
+
+                foreach (var listboxitem in lst_return.Items)
+                {
+                    cmd = new MySqlCommand("UPDATE books SET b_Borrowed_by =" + null + "b_Due_Date = "+ null + "WHERE b_Title =" + listboxitem + ";");
+                    cmd.ExecuteNonQuery();
+                }
+
+                connection.Close();
             }
 
 
@@ -139,10 +155,37 @@ namespace library_sys
 
         private void btn_clean_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"You are about to clear all items in the scanned book lists. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult) 
+            if (MessageBox.Show("You are about to clear all items in the scanned book lists. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult) 
             {
                 lst_borrow.Items.Clear();
                 lst_return.Items.Clear();
+            }
+        }
+
+        private void btn_erase_bor_Click(object sender, EventArgs e)
+        {
+            int i = lst_borrow.SelectedItems.Count;
+            if (MessageBox.Show($"You are about to erase {i} books from the Borrow list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult) 
+            {
+                lst_borrow.SelectedItems.Clear();
+            }
+        }
+
+        private void btn_erase_ret_Click(object sender, EventArgs e)
+        {
+            int i = lst_return.SelectedItems.Count;
+            if (MessageBox.Show($"You are about to erase {i} books from the Return list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult)
+            {
+                lst_return.SelectedItems.Clear();
+            }
+        }
+
+        private void btn_renew_Click(object sender, EventArgs e)
+        {
+            int i = lst_return.SelectedItems.Count;
+            if (MessageBox.Show($"You are about to renew {i} books from the Return list. Confirm?", "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult)
+            {
+                lst_return.SelectedItems.Clear();
             }
         }
     }
