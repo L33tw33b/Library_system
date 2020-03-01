@@ -46,7 +46,7 @@ namespace library_sys
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The book scanned does not exist in the Database, Please contact admin.\n"+ex.Message);
+                MessageBox.Show("Error occured! Please contact admin.\n \n"+ex.Message);
 
             }
             finally
@@ -119,7 +119,6 @@ namespace library_sys
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
             
             fm2.Show();
         }
