@@ -60,7 +60,8 @@ namespace library_sys
 
         private void btn_admin_Click(object sender, EventArgs e)
         {
-
+            Form3 frm3 = new Form3();
+            frm3.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
