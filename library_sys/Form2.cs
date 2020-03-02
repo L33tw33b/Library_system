@@ -46,7 +46,7 @@ namespace library_sys
                 connection.Open();
                 MySqlCommand cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from registered_members where Email='" + txt_user.Text + "' and Password='" + txt_pass.Text + "'";
+                cmd.CommandText = "select * from registered_members where u_Email='" + txt_user.Text + "' and u_Password='" + txt_pass.Text + "'";
                 cmd.ExecuteNonQuery();
                 DataTable dt = new DataTable();
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);

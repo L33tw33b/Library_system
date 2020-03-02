@@ -9,54 +9,66 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
+//-------------------##READ THIS BEFORE CONTINUING##-------------------
+//REPLACE LISTBOXS TO DATABASE IN NEXT COMMIT
+
 namespace library_sys
 {
     public partial class Form1 : Form
-    {   
+    {
+        string connection = @"Server=localhost;Database=library;Uid=root;pwd=root;";
         Form2 fm2 = new Form2();       
         MySqlCommand cmd;
         MySqlDataAdapter da;
         DataTable dt;
-        MySqlDataReader dr;
-        MySqlConnection connection = new MySqlConnection(@"Server=localhost;Database=library;Uid=root;pwd=root;");
         public Form1()
         { 
             InitializeComponent();
 
         }
 
-        private void fill_data(string sql, ListBox lst)
+        void GridFill(string pro, DataGridView control)
         {
-            try
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection))
             {
-                connection.Open();
-                cmd = new MySqlCommand();
-                da = new MySqlDataAdapter();
-                dt = new DataTable();
-                
-
-                cmd.Connection = connection;
-                cmd.CommandText = sql;
-                da.SelectCommand = cmd;
+                mysqlcon.Open();
+                MySqlDataAdapter da = new MySqlDataAdapter(pro, mysqlcon);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                DataTable dt = new DataTable();
                 da.Fill(dt);
-
-                lst.DataSource = dt;
-                lst.DisplayMember = "b_Title";
-
+                control.DataSource = dt;
+                control.Columns[0].Visible = false;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error occured! Please contact admin.\n \n"+ex.Message);
-
-            }
-            finally
-            {
-                connection.Close();
-                da.Dispose();
-            }
-
         }
 
+        void Clear(GroupBox grp)
+        {
+            foreach (Control c in grp.Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = String.Empty;
+                }
+            }
+            
+        }
+
+        void Fillinfo(ListBox lst) {
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
+                if (lst.SelectedIndex != -1)
+                {
+                    cmd = new MySqlCommand("BookInfo", mysqlcon);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("_Title", lst.SelectedItem.ToString());
+                    mysqlcon.Open();
+                    cmd.ExecuteNonQuery();
+
+                    mysqlcon.Close();
+                }
+            }
+
+
+        }
 
         private void btn_admin_Click(object sender, EventArgs e)
         {
@@ -66,10 +78,8 @@ namespace library_sys
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ActiveControl = txt_barcode;
-            txt_barcode.Focus();
-            fill_data("SELECT b_Title FROM books WHERE b_Borrowed_by IS NULL", lst_avabooks);
-            lbl_result.Text = lst_avabooks.Items.Count.ToString() + " results";
+            Clear(grp_booklist);
+            GridFill("BookViewAll",dgv_books);
 
         }
 
@@ -95,32 +105,35 @@ namespace library_sys
 
         private void txt_barcode_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection))
             {
-                connection.Open();
-                cmd = new MySqlCommand("SELECT * FROM books WHERE b_Barcode = "+txt_barcode,connection);
-                dr = cmd.ExecuteReader();
-                dr.Read();
-
-                if ((dr["b_Borrowed_by"].ToString()) != null) {
-                    fill_data("SELECT b_Title FROM books WHERE b_Barcode ='" + txt_barcode.Text + "'", lst_return);
-                } else
+                if (e.KeyCode == Keys.Enter)
                 {
-                    fill_data("SELECT b_Title FROM books WHERE b_Barcode ='" + txt_barcode.Text + "'", lst_borrow);
+                    mysqlcon.Open();
+                    cmd = new MySqlCommand("SELECT * FROM books WHERE b_Barcode = " + txt_barcode.Text, mysqlcon);
+                    cmd.CommandType = CommandType.Text;
+                    MySqlDataReader dr = cmd.ExecuteReader();
+
+
+                    mysqlcon.Close();
+
                 }
-                connection.Close();
             }
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            lst_search.Items.Clear();
-            fill_data("SELECT b_Title FROM books WHERE b_Title ='" + txt_search.Text + "' AND b_Borrowed_by IS NULL", lst_borrow);
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+            {
+                lst_search.Items.Clear();
+                mysqlcon.Open();
+                fill_data("SELECT b_Title FROM books WHERE b_Title ='" + txt_search.Text + "' AND b_Borrowed_by IS NULL", lst_borrow);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
             fm2.Show();
         }
 
@@ -131,34 +144,45 @@ namespace library_sys
             ret = lst_return.Items.Count;
             DateTime due_date = DateTime.Today.AddDays(14);
 
-            if (MessageBox.Show($"You are about to borrow {bor} books and return {ret} books. Confirm?", "Books processing", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult)
+            if (MessageBox.Show($"You are about to borrow {bor} books and return {ret} books. Confirm?", "Books processing", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-
-                connection.Open();
-                foreach(var listboxitem in lst_borrow.Items) 
+                using (MySqlConnection mysqlcon = new MySqlConnection(connection))
                 {
-                    cmd = new MySqlCommand("UPDATE books SET b_Borrowed_by =" + Global.GlobalVar + "b_Due_Date = " + (due_date.ToString("YYYY-mm-dd H:mm:ss")) + "WHERE b_Title =" + listboxitem + ";");
-                    cmd.ExecuteNonQuery();
+                    mysqlcon.Open();
+                    foreach (var listboxitem in lst_borrow.Items)
+                    {
+                        da = new MySqlDataAdapter("BorrowBook", connection);
+                        da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        da.SelectCommand.Parameters.AddWithValue("_Title", listboxitem.ToString());
+                        da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", Global.GlobalVar);
+                        da.SelectCommand.Parameters.AddWithValue("_Due_Date", due_date.ToString("yyyy-MM-dd H:mm:ss"));
+                        da.SelectCommand.ExecuteNonQuery();
+
+                    }
+
+                    foreach (var listboxitem in lst_return.Items)
+                    {
+                        cmd = new MySqlCommand("UPDATE books SET b_Borrowed_by =" + null + "b_Due_Date = " + null + "WHERE b_Title =" + listboxitem + ";", mysqlcon);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.ExecuteNonQuery();
+                    }
+                    mysqlcon.Close();
+                    MessageBox.Show("Process complete.");
+                    lst_borrow.DataSource = null;
+                    lst_return.DataSource = null;
+                    lst_borrow.Items.Clear();
+                    lst_return.Items.Clear();
+
                 }
 
-                foreach (var listboxitem in lst_return.Items)
-                {
-                    cmd = new MySqlCommand("UPDATE books SET b_Borrowed_by =" + null + "b_Due_Date = "+ null + "WHERE b_Title =" + listboxitem + ";");
-                    cmd.ExecuteNonQuery();
-                }
-
-                connection.Close();
             }
-
-
         }
 
         private void btn_clean_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You are about to clear all items in the scanned book lists. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult) 
             {
-                lst_borrow.Items.Clear();
-                lst_return.Items.Clear();
+                Clear(grp_booksscan);
             }
         }
 
@@ -182,48 +206,32 @@ namespace library_sys
 
         private void btn_renew_Click(object sender, EventArgs e)
         {
-            int i = lst_return.SelectedItems.Count;
-            if (MessageBox.Show($"You are about to renew {i} books from the Return list. Confirm?", "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult)
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection))
             {
-                connection.Open();
-                cmd = new MySqlCommand("SELECT * FROM books");
-                dr = cmd.ExecuteReader();
-                dr.Read();
-                foreach (var listboxitems in lst_return.SelectedItems) {
-                    DateTime new_due_date = DateTime.ParseExact(dr["b_Due_Date"].ToString(),"YYYY-mm-dd H:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                    new_due_date.AddDays(14);
-                    cmd = new MySqlCommand("UPDATE books SET b_Due_Date = " + new_due_date.ToString() + "WHERE b_Title =" + listboxitems + ";");
-                    cmd.ExecuteNonQuery();
+                int i = lst_return.SelectedItems.Count;
+                if (MessageBox.Show($"You are about to renew {i} books from the Return list. Confirm?", "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult)
+                {
+                    mysqlcon.Open();
+                    cmd = new MySqlCommand("SELECT * FROM books");
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        foreach (var listboxitems in lst_return.SelectedItems)
+                        {
+                            DateTime new_due_date = DateTime.ParseExact(dr["b_Due_Date"].ToString(), "YYYY-mm-dd H:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                            new_due_date.AddDays(14);
+                            cmd = new MySqlCommand("UPDATE books SET b_Due_Date = " + new_due_date.ToString() + "WHERE b_Title =" + listboxitems + ";", mysqlcon);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    dr.Close();
+                    mysqlcon.Close();
+                    lst_return.SelectedItems.Clear();
                 }
-                connection.Close();
-                lst_return.SelectedItems.Clear();
             }
         }
 
-        private void lst_borrow_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (lst_borrow.SelectedIndex != -1)
-            {
-                btn_erase_bor.Visible = true;
-            }
-            else 
-            {
-                btn_erase_bor.Visible = false;
-            }
-        }
 
-        private void lst_return_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (lst_return.SelectedIndex != -1)
-            {
-                btn_erase_ret.Visible = true;
-                btn_renew.Visible = true;
-            }
-            else
-            {
-                btn_erase_ret.Visible = false;
-                btn_renew.Visible = false;
-            }
-        }
     }
 }

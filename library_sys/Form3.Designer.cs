@@ -31,9 +31,8 @@
             this.dgvuser = new System.Windows.Forms.DataGridView();
             this.grp_userop = new System.Windows.Forms.GroupBox();
             this.grp_booksop = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.btn_clear = new System.Windows.Forms.Button();
             this.txt_seq = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txt_sub = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,10 +55,25 @@
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_add = new System.Windows.Forms.Button();
             this.dgvbook = new System.Windows.Forms.DataGridView();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.cbox_overdue = new System.Windows.Forms.CheckBox();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.btn_clear = new System.Windows.Forms.Button();
+            this.btn_uclear = new System.Windows.Forms.Button();
+            this.btn_udel = new System.Windows.Forms.Button();
+            this.btn_uadd = new System.Windows.Forms.Button();
+            this.btn_usearch = new System.Windows.Forms.Button();
+            this.txt_usearch = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvuser)).BeginInit();
             this.grp_userop.SuspendLayout();
             this.grp_booksop.SuspendLayout();
@@ -71,18 +85,30 @@
             this.dgvuser.AllowUserToAddRows = false;
             this.dgvuser.AllowUserToDeleteRows = false;
             this.dgvuser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvuser.Location = new System.Drawing.Point(339, 19);
+            this.dgvuser.Location = new System.Drawing.Point(339, 11);
             this.dgvuser.Name = "dgvuser";
             this.dgvuser.ReadOnly = true;
-            this.dgvuser.Size = new System.Drawing.Size(979, 341);
+            this.dgvuser.Size = new System.Drawing.Size(979, 333);
             this.dgvuser.TabIndex = 0;
+            this.dgvuser.DoubleClick += new System.EventHandler(this.dgvuser_DoubleClick);
             // 
             // grp_userop
             // 
+            this.grp_userop.Controls.Add(this.label16);
+            this.grp_userop.Controls.Add(this.textBox4);
+            this.grp_userop.Controls.Add(this.label15);
+            this.grp_userop.Controls.Add(this.textBox3);
+            this.grp_userop.Controls.Add(this.label14);
+            this.grp_userop.Controls.Add(this.textBox2);
+            this.grp_userop.Controls.Add(this.label13);
+            this.grp_userop.Controls.Add(this.textBox1);
+            this.grp_userop.Controls.Add(this.btn_uclear);
             this.grp_userop.Controls.Add(this.dgvuser);
+            this.grp_userop.Controls.Add(this.btn_udel);
+            this.grp_userop.Controls.Add(this.btn_uadd);
             this.grp_userop.Location = new System.Drawing.Point(14, 14);
             this.grp_userop.Name = "grp_userop";
-            this.grp_userop.Size = new System.Drawing.Size(1324, 366);
+            this.grp_userop.Size = new System.Drawing.Size(1324, 350);
             this.grp_userop.TabIndex = 1;
             this.grp_userop.TabStop = false;
             this.grp_userop.Text = "Users options";
@@ -120,14 +146,15 @@
             this.grp_booksop.TabStop = false;
             this.grp_booksop.Text = "Books option";
             // 
-            // label11
+            // btn_clear
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(611, 705);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(140, 13);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "b_renew: 1 = True 0 = False";
+            this.btn_clear.Location = new System.Drawing.Point(168, 276);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(75, 23);
+            this.btn_clear.TabIndex = 27;
+            this.btn_clear.Text = "Clear";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // txt_seq
             // 
@@ -136,15 +163,6 @@
             this.txt_seq.Name = "txt_seq";
             this.txt_seq.Size = new System.Drawing.Size(100, 20);
             this.txt_seq.TabIndex = 26;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(98, 705);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Book Search:";
             // 
             // label10
             // 
@@ -341,6 +359,24 @@
             this.dgvbook.TabIndex = 1;
             this.dgvbook.DoubleClick += new System.EventHandler(this.dgvbook_DoubleClick);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(611, 705);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(187, 13);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "b_renew/Is_admin: 1 = True 0 = False";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(98, 705);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Book Search:";
+            // 
             // cbox_overdue
             // 
             this.cbox_overdue.AutoSize = true;
@@ -367,22 +403,133 @@
             this.button1.TabIndex = 27;
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // btn_clear
+            // btn_uclear
             // 
-            this.btn_clear.Location = new System.Drawing.Point(168, 276);
-            this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(75, 23);
-            this.btn_clear.TabIndex = 27;
-            this.btn_clear.Text = "Clear";
-            this.btn_clear.UseVisualStyleBackColor = true;
-            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
+            this.btn_uclear.Location = new System.Drawing.Point(171, 321);
+            this.btn_uclear.Name = "btn_uclear";
+            this.btn_uclear.Size = new System.Drawing.Size(75, 23);
+            this.btn_uclear.TabIndex = 30;
+            this.btn_uclear.Text = "Clear";
+            this.btn_uclear.UseVisualStyleBackColor = true;
+            // 
+            // btn_udel
+            // 
+            this.btn_udel.Location = new System.Drawing.Point(90, 321);
+            this.btn_udel.Name = "btn_udel";
+            this.btn_udel.Size = new System.Drawing.Size(75, 23);
+            this.btn_udel.TabIndex = 29;
+            this.btn_udel.Text = "Delete";
+            this.btn_udel.UseVisualStyleBackColor = true;
+            // 
+            // btn_uadd
+            // 
+            this.btn_uadd.Location = new System.Drawing.Point(9, 321);
+            this.btn_uadd.Name = "btn_uadd";
+            this.btn_uadd.Size = new System.Drawing.Size(75, 23);
+            this.btn_uadd.TabIndex = 28;
+            this.btn_uadd.Text = "Add/Edit";
+            this.btn_uadd.UseVisualStyleBackColor = true;
+            this.btn_uadd.Click += new System.EventHandler(this.btn_uadd_Click);
+            // 
+            // btn_usearch
+            // 
+            this.btn_usearch.Location = new System.Drawing.Point(381, 367);
+            this.btn_usearch.Name = "btn_usearch";
+            this.btn_usearch.Size = new System.Drawing.Size(75, 23);
+            this.btn_usearch.TabIndex = 31;
+            this.btn_usearch.Text = "Search";
+            this.btn_usearch.UseVisualStyleBackColor = true;
+            // 
+            // txt_usearch
+            // 
+            this.txt_usearch.Location = new System.Drawing.Point(175, 369);
+            this.txt_usearch.Name = "txt_usearch";
+            this.txt_usearch.Size = new System.Drawing.Size(200, 20);
+            this.txt_usearch.TabIndex = 32;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(98, 372);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 13);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "User Search:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(9, 36);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 32;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 17);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(38, 13);
+            this.label13.TabIndex = 34;
+            this.label13.Text = "Name:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 59);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(35, 13);
+            this.label14.TabIndex = 36;
+            this.label14.Text = "Email:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(9, 75);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 35;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 98);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 13);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Contact_no:";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(9, 114);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 37;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(9, 137);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(56, 13);
+            this.label16.TabIndex = 40;
+            this.label16.Text = "Password:";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(9, 153);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 39;
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.btn_usearch);
+            this.Controls.Add(this.txt_usearch);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txt_search);
             this.Controls.Add(this.label11);
@@ -395,6 +542,7 @@
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvuser)).EndInit();
             this.grp_userop.ResumeLayout(false);
+            this.grp_userop.PerformLayout();
             this.grp_booksop.ResumeLayout(false);
             this.grp_booksop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvbook)).EndInit();
@@ -437,5 +585,19 @@
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_clear;
+        private System.Windows.Forms.Button btn_uclear;
+        private System.Windows.Forms.Button btn_udel;
+        private System.Windows.Forms.Button btn_uadd;
+        private System.Windows.Forms.Button btn_usearch;
+        private System.Windows.Forms.TextBox txt_usearch;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
