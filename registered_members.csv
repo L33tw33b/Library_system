@@ -1,0 +1,4 @@
+"UID";"u_Name";"u_Email";"u_Contact_no";"u_Password";"u_Is_admin"
+1;"test";"root";"2222 2222";"root";1
+2;"test2";"root2";"2323 3232";"root2";0
+3;"test3";"root3";"2132 1213";"root3";0
