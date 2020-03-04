@@ -63,9 +63,9 @@ namespace library_sys
         }
 
         void Fillinfo(DataGridView dgv) {
-            
-           if (dgv.CurrentRow.Index != -1)
-           {
+
+            if (dgv.CurrentRow.Index != -1)
+            {
                 txt_bookn.Text = dgv_books.CurrentRow.Cells[7].Value.ToString();
                 txt_auth.Text = dgv_books.CurrentRow.Cells[8].Value.ToString();
                 txt_pub.Text = dgv_books.CurrentRow.Cells[9].Value.ToString();
@@ -73,7 +73,10 @@ namespace library_sys
                 txt_pubyear.Text = dgv_books.CurrentRow.Cells[10].Value.ToString();
 
 
-           }
+            }
+            else { 
+                
+            }
 
 
                 
@@ -197,11 +200,13 @@ namespace library_sys
                     {                       
                         MySqlDataAdapter da = new MySqlDataAdapter("ReturnBook",mysqlcon);
                         da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                        da.SelectCommand.Parameters.AddWithValue("_Title", item.Cells["Books"].ToString());                       
+                        da.SelectCommand.Parameters.AddWithValue("_Title", item.Cells["Books"].Value);                       
                         da.SelectCommand.ExecuteNonQuery();
                     }
                     mysqlcon.Close();
                     MessageBox.Show("Process complete.");
+                    dgv_borrow.Rows.Clear();
+                    dgv_return.Rows.Clear();
                     Clear(grp_booklist);
                     GridFill("BookViewAllUPOV", dgv_books);
 
@@ -221,7 +226,7 @@ namespace library_sys
         private void btn_erase_bor_Click(object sender, EventArgs e)
         {
             int i = dgv_borrow.SelectedRows.Count - 1;
-            if (MessageBox.Show($"You are about to erase {i} books from the Borrow list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult) 
+            if (MessageBox.Show($"You are about to erase {i} books from the Borrow list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
             {
                 dgv_borrow.SelectedRows.Clear();
             }
@@ -230,7 +235,7 @@ namespace library_sys
         private void btn_erase_ret_Click(object sender, EventArgs e)
         {
             int i = dgv_return.SelectedRows.Count - 1;
-            if (MessageBox.Show($"You are about to erase {i} books from the Return list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult)
+            if (MessageBox.Show($"You are about to erase {i} books from the Return list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 dgv_return.SelectedRows.Clear();
             }
@@ -267,11 +272,27 @@ namespace library_sys
         private void dgv_books_Click(object sender, EventArgs e)
         {
             Fillinfo(dgv_books);
+            if (dgv_books.CurrentRow.Index != 1) {
+                btn_erase_bor.Visible = true;
+            } else
+            {
+                btn_erase_bor.Visible = false;
+            }
         }
 
         private void dgv_search_Click(object sender, EventArgs e)
         {
             Fillinfo(dgv_search);
+            if (dgv_return.CurrentRow.Index != 1)
+            {
+                btn_erase_ret.Visible = true;
+                btn_renew.Visible = true;
+            }
+            else
+            {
+                btn_erase_ret.Visible = false;
+                btn_renew.Visible = false;
+            }
         }
     }
 }
