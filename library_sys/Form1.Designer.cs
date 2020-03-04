@@ -34,8 +34,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_logoff = new System.Windows.Forms.Button();
             this.btn_admin = new System.Windows.Forms.Button();
-            this.txt_format = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.txt_pubyear = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_sub = new System.Windows.Forms.TextBox();
@@ -48,6 +46,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.grp_booklist = new System.Windows.Forms.GroupBox();
             this.grp_booksscan = new System.Windows.Forms.GroupBox();
+            this.dgv_return = new System.Windows.Forms.DataGridView();
+            this.dgv_borrow = new System.Windows.Forms.DataGridView();
             this.btn_renew = new System.Windows.Forms.Button();
             this.btn_erase_ret = new System.Windows.Forms.Button();
             this.btn_erase_bor = new System.Windows.Forms.Button();
@@ -57,25 +57,23 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btn_process = new System.Windows.Forms.Button();
             this.grp_booksava = new System.Windows.Forms.GroupBox();
+            this.dgv_search = new System.Windows.Forms.DataGridView();
             this.dgv_books = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
             this.lbl_welcome = new System.Windows.Forms.Label();
             this.lbl_result = new System.Windows.Forms.Label();
             this.btn_search = new System.Windows.Forms.Button();
             this.txt_search = new System.Windows.Forms.TextBox();
-            this.dgv_search = new System.Windows.Forms.DataGridView();
-            this.dgv_borrow = new System.Windows.Forms.DataGridView();
-            this.dgv_return = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.grp_bookinfo.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grp_booklist.SuspendLayout();
             this.grp_booksscan.SuspendLayout();
-            this.grp_booksava.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_books)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_search)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_borrow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_return)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_borrow)).BeginInit();
+            this.grp_booksava.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_search)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_books)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -109,8 +107,6 @@
             // grp_bookinfo
             // 
             this.grp_bookinfo.Controls.Add(this.groupBox1);
-            this.grp_bookinfo.Controls.Add(this.txt_format);
-            this.grp_bookinfo.Controls.Add(this.label5);
             this.grp_bookinfo.Controls.Add(this.txt_pubyear);
             this.grp_bookinfo.Controls.Add(this.label7);
             this.grp_bookinfo.Controls.Add(this.txt_sub);
@@ -160,25 +156,6 @@
             this.btn_admin.Text = "Admin Login";
             this.btn_admin.UseVisualStyleBackColor = true;
             this.btn_admin.Click += new System.EventHandler(this.btn_admin_Click);
-            // 
-            // txt_format
-            // 
-            this.txt_format.Location = new System.Drawing.Point(78, 228);
-            this.txt_format.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.txt_format.Name = "txt_format";
-            this.txt_format.ReadOnly = true;
-            this.txt_format.Size = new System.Drawing.Size(100, 20);
-            this.txt_format.TabIndex = 16;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 231);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Format:";
             // 
             // txt_pubyear
             // 
@@ -312,6 +289,26 @@
             this.grp_booksscan.TabStop = false;
             this.grp_booksscan.Text = "Scanned books:";
             // 
+            // dgv_return
+            // 
+            this.dgv_return.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgv_return.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_return.Location = new System.Drawing.Point(305, 42);
+            this.dgv_return.Name = "dgv_return";
+            this.dgv_return.Size = new System.Drawing.Size(290, 251);
+            this.dgv_return.TabIndex = 16;
+            // 
+            // dgv_borrow
+            // 
+            this.dgv_borrow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgv_borrow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_borrow.Location = new System.Drawing.Point(3, 42);
+            this.dgv_borrow.Name = "dgv_borrow";
+            this.dgv_borrow.Size = new System.Drawing.Size(290, 251);
+            this.dgv_borrow.TabIndex = 15;
+            // 
             // btn_renew
             // 
             this.btn_renew.Location = new System.Drawing.Point(442, 14);
@@ -420,13 +417,25 @@
             this.grp_booksava.TabStop = false;
             this.grp_booksava.Text = "Available books:";
             // 
+            // dgv_search
+            // 
+            this.dgv_search.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_search.Location = new System.Drawing.Point(305, 30);
+            this.dgv_search.MultiSelect = false;
+            this.dgv_search.Name = "dgv_search";
+            this.dgv_search.Size = new System.Drawing.Size(290, 317);
+            this.dgv_search.TabIndex = 14;
+            this.dgv_search.Click += new System.EventHandler(this.dgv_search_Click);
+            // 
             // dgv_books
             // 
             this.dgv_books.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_books.Location = new System.Drawing.Point(9, 16);
+            this.dgv_books.MultiSelect = false;
             this.dgv_books.Name = "dgv_books";
             this.dgv_books.Size = new System.Drawing.Size(290, 331);
             this.dgv_books.TabIndex = 13;
+            this.dgv_books.Click += new System.EventHandler(this.dgv_books_Click);
             // 
             // label10
             // 
@@ -473,30 +482,6 @@
             this.txt_search.Size = new System.Drawing.Size(265, 20);
             this.txt_search.TabIndex = 6;
             // 
-            // dgv_search
-            // 
-            this.dgv_search.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_search.Location = new System.Drawing.Point(305, 30);
-            this.dgv_search.Name = "dgv_search";
-            this.dgv_search.Size = new System.Drawing.Size(290, 317);
-            this.dgv_search.TabIndex = 14;
-            // 
-            // dgv_borrow
-            // 
-            this.dgv_borrow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_borrow.Location = new System.Drawing.Point(3, 42);
-            this.dgv_borrow.Name = "dgv_borrow";
-            this.dgv_borrow.Size = new System.Drawing.Size(290, 251);
-            this.dgv_borrow.TabIndex = 15;
-            // 
-            // dgv_return
-            // 
-            this.dgv_return.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_return.Location = new System.Drawing.Point(305, 42);
-            this.dgv_return.Name = "dgv_return";
-            this.dgv_return.Size = new System.Drawing.Size(290, 251);
-            this.dgv_return.TabIndex = 16;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,12 +503,12 @@
             this.grp_booklist.ResumeLayout(false);
             this.grp_booksscan.ResumeLayout(false);
             this.grp_booksscan.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_return)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_borrow)).EndInit();
             this.grp_booksava.ResumeLayout(false);
             this.grp_booksava.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_books)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_search)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_borrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_return)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_books)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -551,8 +536,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txt_barcode;
         private System.Windows.Forms.Button btn_process;
-        private System.Windows.Forms.TextBox txt_format;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button txt_logoff;
         private System.Windows.Forms.Label lbl_result;

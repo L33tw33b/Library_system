@@ -174,6 +174,7 @@ namespace library_sys
                     dgvbook.Columns[0].Visible = false;
                 } else
                 {
+                    mysqlcon.Open();
                     GridFill("BookViewAll",dgvbook);
                 }
 
@@ -223,6 +224,30 @@ namespace library_sys
                     MessageBox.Show("Error Occurred!" + ex.Message);
                 }
 
+
+
+            }
+        }
+
+        private void btn_usearch_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+            {
+                if (txt_search.Text != null)
+                {
+                    mysqlcon.Open();
+                    MySqlDataAdapter da = new MySqlDataAdapter("SearchByValueUser", mysqlcon);
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    da.SelectCommand.Parameters.AddWithValue("_SearchValue", txt_usearch.Text);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvuser.DataSource = dt;
+                    dgvuser.Columns[0].Visible = false;
+                }
+                else
+                {
+                    GridFill("UserViewAll", dgvbook);
+                }
 
 
             }
