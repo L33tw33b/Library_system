@@ -14,21 +14,11 @@ namespace library_sys
 
     public partial class Form2 : Form
     {
-        bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        MySqlConnection connection = new MySqlConnection(@"Server=localhost;Database=library;Uid=root;pwd=root;");
+        string connection = @"Server=localhost;Database=library;Uid=root;pwd=root;";
         int i;
+
+
+
         public Form2()            
         {
             InitializeComponent();
@@ -41,32 +31,46 @@ namespace library_sys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
                 i = 0;
-                connection.Open();
-                MySqlCommand cmd = connection.CreateCommand();
+                mysqlcon.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from registered_members where u_Name = '" + txt_user.Text + "' and u_Password = '" + txt_pass.Text + "'", mysqlcon);
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from registered_members where u_Email='" + txt_user.Text + "' and u_Password='" + txt_pass.Text + "'";
-                cmd.ExecuteNonQuery();
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                da.Fill(dt);
+                MySqlDataReader dr = cmd.ExecuteReader();
+                dt.Load(dr);
                 i = Convert.ToInt32(dt.Rows.Count.ToString());
+                using (dr) {
+                    if (i == 0)
+                    {
+                        MessageBox.Show("Incorrect credentials");
+                    }
+                    else
+                    {
+                        Global.GlobalVar = txt_user.Text;
+                        dr = cmd.ExecuteReader();
+                        if (dr.Read())
+                        {
+                            this.Hide();
+                            Form1 fm1 = new Form1(Convert.ToInt32(dr["u_Borrow_number"].ToString()), Convert.ToInt32(dr["u_Is_admin"].ToString()));
+                            fm1.Show();
+                        }
 
-                if (i == 0)
-                {
-                    MessageBox.Show("Incorrect credentials");
-                }
-                else {
-                    Global.GlobalVar = txt_user.Text;
-                    this.Hide();
-                    Form1 fm1 = new Form1();
-                    fm1.Show();
+                    }
                 }
 
-                connection.Close();
+
+                mysqlcon.Close();
+            }
+
 
             
+        }
+
+        private void btn_reg_Click(object sender, EventArgs e)
+        {
+            Registercs registerfrm = new Registercs();
+            registerfrm.Show();
         }
     }
 }

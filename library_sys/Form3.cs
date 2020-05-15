@@ -64,15 +64,7 @@ namespace library_sys
             }
         }
 
-        void FillTextBox(string dgv) {
-            if (dgv == "book")
-            {
 
-            }
-            else if (dgv == "user") { 
-            
-            }
-        }
 
         void GridFill(string pro,DataGridView control) {
             using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
@@ -154,7 +146,7 @@ namespace library_sys
                 {
                     MessageBox.Show("Error Occured!" + ex);
                 }
-
+                mysqlcon.Close();
             }
         }
 
@@ -178,24 +170,21 @@ namespace library_sys
                     GridFill("BookViewAll",dgvbook);
                 }
 
-
+                mysqlcon.Close();
             }
         }
 
         private void dgvuser_DoubleClick(object sender, EventArgs e)
         {
-            int i = 1;
-            if (dgvbook.CurrentRow.Index != -1)
+            if (dgvuser.CurrentRow.Index != -1)
             {
 
-                foreach (Control c in grp_booksop.Controls)
-                {
-                    if (c is TextBox)
-                    {
-                        c.Text = dgvbook.CurrentRow.Cells[i].Value.ToString();
-                        i++;
-                    }
-                }
+                    txt_u_name.Text = dgvuser.CurrentRow.Cells[1].Value.ToString();
+                    txt_u_email.Text = dgvuser.CurrentRow.Cells[2].Value.ToString();
+                    txt_u_contact.Text = dgvuser.CurrentRow.Cells[3].Value.ToString();
+                    txt_u_pass.Text = dgvuser.CurrentRow.Cells[4].Value.ToString();
+                    txt_rName.Text = dgvuser.CurrentRow.Cells[7].Value.ToString();
+                
             }
         }
 
@@ -209,22 +198,25 @@ namespace library_sys
                     MySqlCommand cmd = new MySqlCommand("AddOrEditUser", mysqlcon);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("_ID", uid);
-                    cmd.Parameters.AddWithValue("_Name", txt_seq.Text.Trim());
-                    cmd.Parameters.AddWithValue("_Email", txt_sub.Text.Trim());
-                    cmd.Parameters.AddWithValue("_Contact_no", txt_pub.Text.Trim());
-                    cmd.Parameters.AddWithValue("_Password", txt_auth.Text.Trim());
+                    cmd.Parameters.AddWithValue("_Name", txt_u_name.Text.Trim());
+                    cmd.Parameters.AddWithValue("_Email", txt_u_email.Text.Trim());
+                    cmd.Parameters.AddWithValue("_Contact_no", txt_u_contact.Text.Trim());
+                    cmd.Parameters.AddWithValue("_Password", txt_u_pass.Text);
+                    cmd.Parameters.AddWithValue("_Is_admin", 0);
+                    cmd.Parameters.AddWithValue("_Borrow_number", 2);
+                    cmd.Parameters.AddWithValue("_rName", txt_rName.Text.Trim());
 
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Submitted.");
                     Clear(grp_userop);
-                    GridFill("BookViewAll", dgvuser);
+                    GridFill("UserViewAll", dgvuser);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error Occurred!" + ex.Message);
                 }
 
-
+                mysqlcon.Close();
 
             }
         }
@@ -248,9 +240,59 @@ namespace library_sys
                 {
                     GridFill("UserViewAll", dgvbook);
                 }
-
+                mysqlcon.Close();
 
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string selecteduser = dgvuser.CurrentRow.Cells["u_Name"].Value.ToString();
+
+            if (Convert.ToInt32(dgvuser.CurrentRow.Cells["u_Is_admin"].Value) == 0) {
+                if (MessageBox.Show($"You are about to give admin privilege to {selecteduser}.", "Admin privilege", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+                    {
+                        try
+                        {
+                            mysqlcon.Open();
+                            MySqlCommand cmd = new MySqlCommand("UPDATE registered_members SET u_Is_admin = 1 WHERE u_Name = '" + selecteduser + "';", mysqlcon);
+                            cmd.CommandType = CommandType.Text;
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Privilege has been given.");
+                            mysqlcon.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+            } else {
+                if (MessageBox.Show($"You are about to confine admin privilege from {selecteduser}.", "Admin privilege", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+                    {
+                        try
+                        {
+                            mysqlcon.Open();
+                            MySqlCommand cmd = new MySqlCommand("UPDATE registered_members SET u_Is_admin = 0 WHERE u_Name = '" + selecteduser + "';", mysqlcon);
+                            cmd.CommandType = CommandType.Text;
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Privilege has been taken.");
+                            mysqlcon.Close();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+            }
+            Clear(grp_userop);
+            GridFill("UserViewAll", dgvuser);
         }
     }
 }

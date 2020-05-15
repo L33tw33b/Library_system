@@ -30,14 +30,17 @@
         {
             this.dgvuser = new System.Windows.Forms.DataGridView();
             this.grp_userop = new System.Windows.Forms.GroupBox();
+            this.btn_giveadmin = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txt_rName = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txt_u_pass = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txt_u_contact = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_u_email = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_u_name = new System.Windows.Forms.TextBox();
             this.btn_uclear = new System.Windows.Forms.Button();
             this.btn_udel = new System.Windows.Forms.Button();
             this.btn_uadd = new System.Windows.Forms.Button();
@@ -94,14 +97,17 @@
             // 
             // grp_userop
             // 
+            this.grp_userop.Controls.Add(this.btn_giveadmin);
+            this.grp_userop.Controls.Add(this.label17);
+            this.grp_userop.Controls.Add(this.txt_rName);
             this.grp_userop.Controls.Add(this.label16);
-            this.grp_userop.Controls.Add(this.textBox4);
+            this.grp_userop.Controls.Add(this.txt_u_pass);
             this.grp_userop.Controls.Add(this.label15);
-            this.grp_userop.Controls.Add(this.textBox3);
+            this.grp_userop.Controls.Add(this.txt_u_contact);
             this.grp_userop.Controls.Add(this.label14);
-            this.grp_userop.Controls.Add(this.textBox2);
+            this.grp_userop.Controls.Add(this.txt_u_email);
             this.grp_userop.Controls.Add(this.label13);
-            this.grp_userop.Controls.Add(this.textBox1);
+            this.grp_userop.Controls.Add(this.txt_u_name);
             this.grp_userop.Controls.Add(this.btn_uclear);
             this.grp_userop.Controls.Add(this.dgvuser);
             this.grp_userop.Controls.Add(this.btn_udel);
@@ -113,6 +119,32 @@
             this.grp_userop.TabStop = false;
             this.grp_userop.Text = "Users options";
             // 
+            // btn_giveadmin
+            // 
+            this.btn_giveadmin.Location = new System.Drawing.Point(252, 293);
+            this.btn_giveadmin.Name = "btn_giveadmin";
+            this.btn_giveadmin.Size = new System.Drawing.Size(75, 51);
+            this.btn_giveadmin.TabIndex = 43;
+            this.btn_giveadmin.Text = "Admin Privilege";
+            this.btn_giveadmin.UseVisualStyleBackColor = true;
+            this.btn_giveadmin.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 181);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(57, 13);
+            this.label17.TabIndex = 42;
+            this.label17.Text = "Full Name:";
+            // 
+            // txt_rName
+            // 
+            this.txt_rName.Location = new System.Drawing.Point(9, 197);
+            this.txt_rName.Name = "txt_rName";
+            this.txt_rName.Size = new System.Drawing.Size(100, 20);
+            this.txt_rName.TabIndex = 41;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -122,12 +154,12 @@
             this.label16.TabIndex = 40;
             this.label16.Text = "Password:";
             // 
-            // textBox4
+            // txt_u_pass
             // 
-            this.textBox4.Location = new System.Drawing.Point(9, 153);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 39;
+            this.txt_u_pass.Location = new System.Drawing.Point(9, 153);
+            this.txt_u_pass.Name = "txt_u_pass";
+            this.txt_u_pass.Size = new System.Drawing.Size(100, 20);
+            this.txt_u_pass.TabIndex = 39;
             // 
             // label15
             // 
@@ -138,12 +170,12 @@
             this.label15.TabIndex = 38;
             this.label15.Text = "Contact_no:";
             // 
-            // textBox3
+            // txt_u_contact
             // 
-            this.textBox3.Location = new System.Drawing.Point(9, 114);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 37;
+            this.txt_u_contact.Location = new System.Drawing.Point(9, 114);
+            this.txt_u_contact.Name = "txt_u_contact";
+            this.txt_u_contact.Size = new System.Drawing.Size(100, 20);
+            this.txt_u_contact.TabIndex = 37;
             // 
             // label14
             // 
@@ -154,12 +186,12 @@
             this.label14.TabIndex = 36;
             this.label14.Text = "Email:";
             // 
-            // textBox2
+            // txt_u_email
             // 
-            this.textBox2.Location = new System.Drawing.Point(9, 75);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 35;
+            this.txt_u_email.Location = new System.Drawing.Point(9, 75);
+            this.txt_u_email.Name = "txt_u_email";
+            this.txt_u_email.Size = new System.Drawing.Size(100, 20);
+            this.txt_u_email.TabIndex = 35;
             // 
             // label13
             // 
@@ -170,12 +202,12 @@
             this.label13.TabIndex = 34;
             this.label13.Text = "Name:";
             // 
-            // textBox1
+            // txt_u_name
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 32;
+            this.txt_u_name.Location = new System.Drawing.Point(9, 36);
+            this.txt_u_name.Name = "txt_u_name";
+            this.txt_u_name.Size = new System.Drawing.Size(100, 20);
+            this.txt_u_name.TabIndex = 32;
             // 
             // btn_uclear
             // 
@@ -593,12 +625,15 @@
         private System.Windows.Forms.TextBox txt_usearch;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txt_u_pass;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txt_u_contact;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_u_email;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_u_name;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txt_rName;
+        private System.Windows.Forms.Button btn_giveadmin;
     }
 }
