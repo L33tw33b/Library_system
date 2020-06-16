@@ -77,6 +77,7 @@
             this.btn_usearch = new System.Windows.Forms.Button();
             this.txt_usearch = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.btn_return = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvuser)).BeginInit();
             this.grp_userop.SuspendLayout();
             this.grp_booksop.SuspendLayout();
@@ -93,7 +94,7 @@
             this.dgvuser.ReadOnly = true;
             this.dgvuser.Size = new System.Drawing.Size(979, 333);
             this.dgvuser.TabIndex = 0;
-            this.dgvuser.DoubleClick += new System.EventHandler(this.dgvuser_DoubleClick);
+            this.dgvuser.Click += new System.EventHandler(this.dgvuser_Click);
             // 
             // grp_userop
             // 
@@ -239,6 +240,7 @@
             // 
             // grp_booksop
             // 
+            this.grp_booksop.Controls.Add(this.btn_return);
             this.grp_booksop.Controls.Add(this.btn_clear);
             this.grp_booksop.Controls.Add(this.txt_seq);
             this.grp_booksop.Controls.Add(this.label10);
@@ -481,7 +483,7 @@
             this.dgvbook.ReadOnly = true;
             this.dgvbook.Size = new System.Drawing.Size(979, 290);
             this.dgvbook.TabIndex = 1;
-            this.dgvbook.DoubleClick += new System.EventHandler(this.dgvbook_DoubleClick);
+            this.dgvbook.Click += new System.EventHandler(this.dgvbook_Click);
             // 
             // label11
             // 
@@ -554,6 +556,16 @@
             this.label12.Size = new System.Drawing.Size(69, 13);
             this.label12.TabIndex = 30;
             this.label12.Text = "User Search:";
+            // 
+            // btn_return
+            // 
+            this.btn_return.Location = new System.Drawing.Point(250, 276);
+            this.btn_return.Name = "btn_return";
+            this.btn_return.Size = new System.Drawing.Size(75, 23);
+            this.btn_return.TabIndex = 28;
+            this.btn_return.Text = "Return book";
+            this.btn_return.UseVisualStyleBackColor = true;
+            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
             // 
             // Form3
             // 
@@ -635,5 +647,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txt_rName;
         private System.Windows.Forms.Button btn_giveadmin;
+        private System.Windows.Forms.Button btn_return;
     }
 }

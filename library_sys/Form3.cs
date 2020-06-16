@@ -88,23 +88,6 @@ namespace library_sys
             btn_add.Text = "Save";
         }
 
-        private void dgvbook_DoubleClick(object sender, EventArgs e)
-        {
-            int i = 1;
-            if (dgvbook.CurrentRow.Index != -1) {
-                
-                foreach (Control c in grp_booksop.Controls) {
-                    if (c is TextBox) {               
-                        c.Text = dgvbook.CurrentRow.Cells[i].Value.ToString();
-                        i++;
-                    }
-                }
-            }
-            bid = Convert.ToInt32(dgvbook.CurrentRow.Cells[0].Value.ToString());
-            btn_add.Text = "Edit";
-            
-        }
-
         private void cbox_overdue_CheckedChanged(object sender, EventArgs e)
         {
             using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
@@ -171,20 +154,6 @@ namespace library_sys
                 }
 
                 mysqlcon.Close();
-            }
-        }
-
-        private void dgvuser_DoubleClick(object sender, EventArgs e)
-        {
-            if (dgvuser.CurrentRow.Index != -1)
-            {
-
-                    txt_u_name.Text = dgvuser.CurrentRow.Cells[1].Value.ToString();
-                    txt_u_email.Text = dgvuser.CurrentRow.Cells[2].Value.ToString();
-                    txt_u_contact.Text = dgvuser.CurrentRow.Cells[3].Value.ToString();
-                    txt_u_pass.Text = dgvuser.CurrentRow.Cells[4].Value.ToString();
-                    txt_rName.Text = dgvuser.CurrentRow.Cells[7].Value.ToString();
-                
             }
         }
 
@@ -293,6 +262,70 @@ namespace library_sys
             }
             Clear(grp_userop);
             GridFill("UserViewAll", dgvuser);
+        }
+
+        private void btn_return_Click(object sender, EventArgs e)
+        {
+            string selectedbook = txt_title.Text;
+            if (MessageBox.Show($"Return {selectedbook}?", "Admin privilege", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (dgvbook.CurrentRow.Cells[11].Value == System.DBNull.Value)
+                {
+                    MessageBox.Show("Book has already been returned!");
+                }
+                else
+                {
+                    using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+                    {
+                        try
+                        {
+                            mysqlcon.Open();
+                            MySqlCommand cmd = new MySqlCommand("ReturnBook", mysqlcon);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("_Title", txt_title.Text.Trim());
+                            cmd.Parameters.AddWithValue("_Borrowed_by", dgvbook.CurrentRow.Cells[11].Value.ToString());
+                            MessageBox.Show("Process complete.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Book Title may not exist! \n" + ex.Message);
+                        }
+
+                    }
+                }
+            }
+        }
+        private void dgvbook_Click(object sender, EventArgs e)
+        {
+            int i = 1;
+            if (dgvbook.CurrentRow.Index != -1)
+            {
+
+                foreach (Control c in grp_booksop.Controls)
+                {
+                    if (c is TextBox)
+                    {
+                        c.Text = dgvbook.CurrentRow.Cells[i].Value.ToString();
+                        i++;
+                    }
+                }
+            }
+            bid = Convert.ToInt32(dgvbook.CurrentRow.Cells[0].Value.ToString());
+            btn_add.Text = "Edit";
+        }
+
+        private void dgvuser_Click(object sender, EventArgs e)
+        {
+            if (dgvuser.CurrentRow.Index != -1)
+            {
+
+                txt_u_name.Text = dgvuser.CurrentRow.Cells[1].Value.ToString();
+                txt_u_email.Text = dgvuser.CurrentRow.Cells[2].Value.ToString();
+                txt_u_contact.Text = dgvuser.CurrentRow.Cells[3].Value.ToString();
+                txt_u_pass.Text = dgvuser.CurrentRow.Cells[4].Value.ToString();
+                txt_rName.Text = dgvuser.CurrentRow.Cells[7].Value.ToString();
+
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,15 +19,17 @@ namespace library_sys
         int borrowamount = 0; //Amount of books that can be borrowed (Initial value)
         int adminval = 0; // Is admin or not
         int iniamount = 0; // Initial amount of books borrowed;
+        string currentuser;
         string connection = @"Server=localhost;Database=library;Uid=root;pwd=root;";
         Form2 fm2 = new Form2();       
-        public Form1(int value,int admin)
+        public Form1(int value,int admin, string user)
         {
             
             InitializeComponent();
             borrowamount = value;
             adminval = admin;
             iniamount = value;
+            currentuser = user;
         }
 
 
@@ -90,7 +93,14 @@ namespace library_sys
             if (adminval == 0) {
                 btn_admin.Visible = false;
             }
-            MessageBox.Show($"You can borrow {borrowamount} books now.");
+            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag) {
+                case "zh-HK": MessageBox.Show($"你可借 {borrowamount} 本書.");
+                    break;
+                case "en-US":
+                    MessageBox.Show($"You can borrow {borrowamount} books.");
+                    break;
+            }
+            
             txt_barcode.Focus();
             Clear(grp_booklist);
             GridFill("BookViewAll",dgv_books);
@@ -112,7 +122,7 @@ namespace library_sys
 
         private void txt_barcode_Enter(object sender, EventArgs e)
         {
-            if (txt_barcode.Text == "Click here when scanning books...")
+            if (txt_barcode.Text == "掃描書籍按此..." || txt_barcode.Text == "Click here when scanning books...")
             {
                 txt_barcode.Text = "";
 
@@ -124,8 +134,17 @@ namespace library_sys
         {
             if (txt_barcode.Text == "")
             {
-                txt_barcode.Text = "Click here when scanning books...";
-
+                switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                {
+                    case "zh-HK":
+                        txt_barcode.Text = "掃描書籍按此..."; 
+                        break;
+                    case "en-US":
+                        txt_barcode.Text = "Click here when scanning books...";
+                        break;
+                }
+                
+                
                 txt_barcode.ForeColor = Color.Silver;
             }
         }
@@ -141,7 +160,7 @@ namespace library_sys
                         int dgvborrow_rows = dgv_borrow.Rows.Count - 1;
                         int dgvreturn_rows = dgv_return.Rows.Count - 1;
                         bool exist = false;
-                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM books WHERE b_Barcode = " + txt_barcode.Text, mysqlcon);
+                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM books WHERE b_Barcode = '" + txt_barcode.Text + "'", mysqlcon);
                         cmd.CommandType = CommandType.Text;
                         MySqlDataReader dr = cmd.ExecuteReader();
                         if(dr.Read())
@@ -156,27 +175,53 @@ namespace library_sys
                             }
                             if (exist)
                             {
-                                MessageBox.Show("This item has already been scanned.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            } 
+                                MessageBox.Show("項目己掃描.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                
+                            } else
+                            {   
                             if (dr["b_Borrowed_by"] == System.DBNull.Value)
                             {
                                 if (borrowamount > 0)
                                 {
                                     dgv_borrow.Rows.Add(dr["b_Title"]);
                                     borrowamount--;
-                                } else { 
-                                MessageBox.Show("You cannot borrow anymore books.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                } 
+                                }
+                                else
+                                {
+                                    switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                                    {
+                                        case "zh-HK":
+                                            MessageBox.Show("你不可借閱多於2本書.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            break;
+                                        case "en-US":
+                                            MessageBox.Show("You cannot borrow more than 2 books.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            break;
+                                    }
+                                    
+                                }
 
                             }
                             else
                             {
-                            dgv_return.Rows.Add(dr["b_Title"], dr["b_renewed"], dr["b_Due_Date"]);
-                            }        
+                                dgv_return.Rows.Add(dr["b_Title"], dr["b_renewed"], dr["b_Due_Date"]);
+                            }
+
+                            }
+
                         }   
                 else
                 {
-                    MessageBox.Show("This item does not exist in the database! Make sure to reset the textbox.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                        {
+                            case "zh-HK":
+                                MessageBox.Show("項目不屬於數據庫!請確定而清除文本框內容.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                break;
+                            case "en-US":
+                                MessageBox.Show("Item does not belong to the database! Please make sure to clear textbox.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                break;
+                        }
+
+                        
                 }
                     mysqlcon.Close();
                     txt_barcode.SelectAll();
@@ -206,19 +251,27 @@ namespace library_sys
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
             fm2.Show();
+            this.Hide();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            string message = "", endmessage = "";
             int bor, ret;
             bor = dgv_borrow.Rows.Count - 1;
             ret = dgv_return.Rows.Count - 1;
             DateTime due_date = DateTime.Today.AddDays(14);
-
-            if (MessageBox.Show($"You are about to borrow {bor} books and return {ret} books. Confirm?", "Books processing", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag) {
+                case "zh-HK": message = $"你將要借{bor}本書及還{ret}本書.確定?";
+                    endmessage = "操作完成.";
+                    break;
+                case "en-US": message = $"You are about to borrow {bor} books and return {ret} books. Confirm?";
+                    endmessage = "Process complete.";
+                    break;
+            }
+            if (MessageBox.Show(message, "Books processing", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 using (MySqlConnection mysqlcon = new MySqlConnection(connection))
                 {
@@ -229,7 +282,7 @@ namespace library_sys
                                 MySqlDataAdapter da = new MySqlDataAdapter("BorrowBook", mysqlcon);
                                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                                 da.SelectCommand.Parameters.AddWithValue("_Title", item.Cells["Books"].Value);
-                                da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", Global.GlobalVar);
+                                da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", currentuser);
                                 da.SelectCommand.Parameters.AddWithValue("_Due_Date", due_date.ToString("yyyy-MM-dd H:mm:ss"));
                                 da.SelectCommand.ExecuteNonQuery();
                         }
@@ -244,18 +297,21 @@ namespace library_sys
                                 MySqlDataAdapter da = new MySqlDataAdapter("ReturnBook", mysqlcon);
                                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                                 da.SelectCommand.Parameters.AddWithValue("_Title", item.Cells["Books"].Value);
-                                da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", Global.GlobalVar);
+                                da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", currentuser);
                                 da.SelectCommand.ExecuteNonQuery();
                         }
                     }
                     mysqlcon.Close();
-                    MessageBox.Show("Process complete.");
+                    MessageBox.Show(endmessage);
                     dgv_borrow.Rows.Clear();
                     dgv_return.Rows.Clear();
                     Clear(grp_booklist);
                     GridFill("BookViewAll", dgv_books);
-                    this.Hide();
                     fm2.Show();
+                    this.Hide();
+                    
+                    
+                    
                 }
 
             }
@@ -263,7 +319,17 @@ namespace library_sys
 
         private void btn_clean_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("You are about to clear all items in the scanned book lists. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+            string message = "";
+            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+            {
+                case "zh-HK":
+                    message = $"清除所有項目?";
+                    break;
+                case "en-US":
+                    message = $"Clear all items?";
+                    break;
+            }
+            if (MessageBox.Show(message, "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
             {
                 dgv_return.Rows.Clear();
                 dgv_borrow.Rows.Clear();
@@ -274,7 +340,17 @@ namespace library_sys
         private void btn_erase_bor_Click(object sender, EventArgs e)
         {
             int delamountbor = dgv_borrow.SelectedRows.Count;
-            if (MessageBox.Show($"You are about to erase {delamountbor} books from the Borrow list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+            string message = "";
+            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+            {
+                case "zh-HK":
+                    message = $"從借閱清單清除{delamountbor}本書?";
+                    break;
+                case "en-US":
+                    message = $"Delete {delamountbor} from borrow list?";
+                    break;
+            }
+            if (MessageBox.Show(message, "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
             {
                 try {
                     dgv_borrow.Rows.RemoveAt(this.dgv_borrow.SelectedRows[0].Index);
@@ -290,7 +366,17 @@ namespace library_sys
         private void btn_erase_ret_Click(object sender, EventArgs e)
         {
             int delamountret = dgv_return.SelectedRows.Count;
-            if (MessageBox.Show($"You are about to erase {delamountret} books from the Return list. Confirm?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            string message = "";
+            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+            {
+                case "zh-HK":
+                    message = $"從借閱清單清除{delamountret}本書?";
+                    break;
+                case "en-US":
+                    message = $"Delete {delamountret} from borrow list?";
+                    break;
+            }
+            if (MessageBox.Show($"從退還清單清除{delamountret}本書?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try {
                     dgv_return.Rows.RemoveAt(this.dgv_return.SelectedRows[0].Index);
@@ -305,10 +391,22 @@ namespace library_sys
 
         private void btn_renew_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+            int renewamount = dgv_return.SelectedRows.Count;
+            string message = "", endmessage = "", errmess = "";
+            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
-                int renewamount = dgv_return.SelectedRows.Count;
-                if (MessageBox.Show($"You are about to renew {renewamount} books from the Return list. Confirm?", "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                case "zh-HK":
+                    message = $"續借{renewamount}本書?";
+                    endmessage = "操作完成.";
+                    break;
+                case "en-US":
+                    message = $"Renew {renewamount} books?";
+                    endmessage = "Process complete.";
+                    break;
+            }      
+                if (MessageBox.Show($"續借{renewamount}本書?", "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                using (MySqlConnection mysqlcon = new MySqlConnection(connection))
                 {
                     mysqlcon.Open();
                     /*MySqlCommand cmd = new MySqlCommand("SELECT * FROM books", mysqlcon);
@@ -329,11 +427,20 @@ namespace library_sys
                         cmd.ExecuteNonQuery();
                     } else 
                         {
-                        MessageBox.Show(listboxitems.ToString() + " cannot be renewed as it has already been renewed or exceed due date."); 
+                            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                            {
+                                case "zh-HK":
+                                    errmess = $"{listboxitems.ToString()} 不可續借,因為已經被更新或超過了到止日期。";
+                                    break;
+                                case "en-US":
+                                    errmess = $"{listboxitems.ToString()} cannot be renewed as it has already been renewed or exceed due date.";
+                                    break;
+                            }
+                        MessageBox.Show(errmess); 
                         }
                     }
 
-                    MessageBox.Show("Process compelete.");
+                    MessageBox.Show(endmessage);
                     GridFill("BookViewAll", dgv_books);
                     
                 }
@@ -396,8 +503,33 @@ namespace library_sys
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Hide();
             fm2.Show();
+            this.Hide();
+            
+        }
+
+        private void btn_chi_Click(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-HK");
+            this.Controls.Clear();
+            InitializeComponent();
+        }
+
+        private void btn_eng_Click(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+            this.Controls.Clear();
+            InitializeComponent();
+        }
+
+        private void grp_booklist_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

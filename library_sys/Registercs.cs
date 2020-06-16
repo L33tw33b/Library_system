@@ -16,7 +16,7 @@ namespace library_sys
         string connection = @"Server=localhost;Database=library;Uid=root;pwd=root;";
         int uid = 0;
         bool IsEmpty() {
-            if (String.IsNullOrEmpty(txt_uName.Text) || String.IsNullOrEmpty(txt_uPass.Text) || String.IsNullOrEmpty(txt_uContact.Text)) { 
+            if (String.IsNullOrEmpty(txt_uName.Text) || String.IsNullOrEmpty(txt_uPass.Text) || (String.IsNullOrEmpty(txt_uContact.Text) && String.IsNullOrEmpty(txt_uEmail.Text))) { 
                 return true;
             } else { 
                 return false;

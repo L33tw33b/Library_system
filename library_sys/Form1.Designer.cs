@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.grp_bookinfo = new System.Windows.Forms.GroupBox();
@@ -79,34 +80,20 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.57014F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.429864F));
+            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1346, 51);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label6, "label6");
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(365, 4);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(541, 42);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Lam Tin Church Library System";
             // 
             // grp_bookinfo
             // 
+            resources.ApplyResources(this.grp_bookinfo, "grp_bookinfo");
             this.grp_bookinfo.Controls.Add(this.groupBox1);
             this.grp_bookinfo.Controls.Add(this.txt_pubyear);
             this.grp_bookinfo.Controls.Add(this.label7);
@@ -118,160 +105,98 @@
             this.grp_bookinfo.Controls.Add(this.label3);
             this.grp_bookinfo.Controls.Add(this.label2);
             this.grp_bookinfo.Controls.Add(this.label1);
-            this.grp_bookinfo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.grp_bookinfo.Location = new System.Drawing.Point(0, 51);
             this.grp_bookinfo.Name = "grp_bookinfo";
-            this.grp_bookinfo.Size = new System.Drawing.Size(200, 674);
-            this.grp_bookinfo.TabIndex = 1;
             this.grp_bookinfo.TabStop = false;
-            this.grp_bookinfo.Text = "BookInfo";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txt_logoff);
             this.groupBox1.Controls.Add(this.btn_admin);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(3, 571);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(194, 100);
-            this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Options";
             // 
             // txt_logoff
             // 
-            this.txt_logoff.Location = new System.Drawing.Point(9, 45);
+            resources.ApplyResources(this.txt_logoff, "txt_logoff");
             this.txt_logoff.Name = "txt_logoff";
-            this.txt_logoff.Size = new System.Drawing.Size(179, 23);
-            this.txt_logoff.TabIndex = 12;
-            this.txt_logoff.Text = "Log off";
             this.txt_logoff.UseVisualStyleBackColor = true;
             this.txt_logoff.Click += new System.EventHandler(this.button2_Click);
             // 
             // btn_admin
             // 
-            this.btn_admin.Location = new System.Drawing.Point(9, 74);
+            resources.ApplyResources(this.btn_admin, "btn_admin");
             this.btn_admin.Name = "btn_admin";
-            this.btn_admin.Size = new System.Drawing.Size(179, 23);
-            this.btn_admin.TabIndex = 11;
-            this.btn_admin.Text = "Admin Login";
             this.btn_admin.UseVisualStyleBackColor = true;
             this.btn_admin.Click += new System.EventHandler(this.btn_admin_Click);
             // 
             // txt_pubyear
             // 
-            this.txt_pubyear.Location = new System.Drawing.Point(78, 185);
-            this.txt_pubyear.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.txt_pubyear, "txt_pubyear");
             this.txt_pubyear.Name = "txt_pubyear";
             this.txt_pubyear.ReadOnly = true;
-            this.txt_pubyear.Size = new System.Drawing.Size(100, 20);
-            this.txt_pubyear.TabIndex = 13;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 188);
-            this.label7.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Publish Year:";
             // 
             // txt_sub
             // 
-            this.txt_sub.Location = new System.Drawing.Point(78, 142);
-            this.txt_sub.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.txt_sub, "txt_sub");
             this.txt_sub.Name = "txt_sub";
             this.txt_sub.ReadOnly = true;
-            this.txt_sub.Size = new System.Drawing.Size(100, 20);
-            this.txt_sub.TabIndex = 9;
             // 
             // txt_pub
             // 
-            this.txt_pub.Location = new System.Drawing.Point(78, 99);
-            this.txt_pub.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.txt_pub, "txt_pub");
             this.txt_pub.Name = "txt_pub";
             this.txt_pub.ReadOnly = true;
-            this.txt_pub.Size = new System.Drawing.Size(100, 20);
-            this.txt_pub.TabIndex = 8;
             // 
             // txt_auth
             // 
-            this.txt_auth.Location = new System.Drawing.Point(78, 56);
-            this.txt_auth.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.txt_auth, "txt_auth");
             this.txt_auth.Name = "txt_auth";
             this.txt_auth.ReadOnly = true;
-            this.txt_auth.Size = new System.Drawing.Size(100, 20);
-            this.txt_auth.TabIndex = 7;
             // 
             // txt_bookn
             // 
-            this.txt_bookn.Location = new System.Drawing.Point(78, 13);
-            this.txt_bookn.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.txt_bookn, "txt_bookn");
             this.txt_bookn.Name = "txt_bookn";
             this.txt_bookn.ReadOnly = true;
-            this.txt_bookn.Size = new System.Drawing.Size(100, 20);
-            this.txt_bookn.TabIndex = 6;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 145);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Subject:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 102);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Publisher:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 59);
-            this.label2.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Author:";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 16);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Title:";
             // 
             // grp_booklist
             // 
-            this.grp_booklist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.grp_booklist, "grp_booklist");
             this.grp_booklist.Controls.Add(this.grp_booksscan);
             this.grp_booklist.Controls.Add(this.grp_booksava);
-            this.grp_booklist.Location = new System.Drawing.Point(203, 51);
             this.grp_booklist.Name = "grp_booklist";
-            this.grp_booklist.Size = new System.Drawing.Size(1143, 674);
-            this.grp_booklist.TabIndex = 2;
             this.grp_booklist.TabStop = false;
-            this.grp_booklist.Text = "Book List";
+            this.grp_booklist.Enter += new System.EventHandler(this.grp_booklist_Enter);
             // 
             // grp_booksscan
             // 
-            this.grp_booksscan.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.grp_booksscan, "grp_booksscan");
             this.grp_booksscan.Controls.Add(this.dgv_return);
             this.grp_booksscan.Controls.Add(this.dgv_borrow);
             this.grp_booksscan.Controls.Add(this.btn_renew);
@@ -282,135 +207,86 @@
             this.grp_booksscan.Controls.Add(this.label9);
             this.grp_booksscan.Controls.Add(this.label8);
             this.grp_booksscan.Controls.Add(this.btn_process);
-            this.grp_booksscan.Location = new System.Drawing.Point(3, 369);
-            this.grp_booksscan.Margin = new System.Windows.Forms.Padding(2, 3, 3, 3);
             this.grp_booksscan.Name = "grp_booksscan";
-            this.grp_booksscan.Size = new System.Drawing.Size(1137, 302);
-            this.grp_booksscan.TabIndex = 5;
             this.grp_booksscan.TabStop = false;
-            this.grp_booksscan.Text = "Scanned books:";
             // 
             // dgv_return
             // 
-            this.dgv_return.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.dgv_return, "dgv_return");
             this.dgv_return.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_return.Location = new System.Drawing.Point(305, 42);
             this.dgv_return.MultiSelect = false;
             this.dgv_return.Name = "dgv_return";
             this.dgv_return.ReadOnly = true;
             this.dgv_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_return.Size = new System.Drawing.Size(290, 251);
-            this.dgv_return.TabIndex = 16;
             this.dgv_return.Click += new System.EventHandler(this.dgv_return_Click);
             // 
             // dgv_borrow
             // 
-            this.dgv_borrow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            resources.ApplyResources(this.dgv_borrow, "dgv_borrow");
             this.dgv_borrow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_borrow.Location = new System.Drawing.Point(3, 42);
             this.dgv_borrow.MultiSelect = false;
             this.dgv_borrow.Name = "dgv_borrow";
             this.dgv_borrow.ReadOnly = true;
             this.dgv_borrow.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_borrow.Size = new System.Drawing.Size(290, 251);
-            this.dgv_borrow.TabIndex = 15;
             this.dgv_borrow.Click += new System.EventHandler(this.dgv_borrow_Click);
             // 
             // btn_renew
             // 
-            this.btn_renew.Location = new System.Drawing.Point(442, 14);
+            resources.ApplyResources(this.btn_renew, "btn_renew");
             this.btn_renew.Name = "btn_renew";
-            this.btn_renew.Size = new System.Drawing.Size(75, 23);
-            this.btn_renew.TabIndex = 13;
-            this.btn_renew.Text = "Renew";
             this.btn_renew.UseVisualStyleBackColor = true;
-            this.btn_renew.Visible = false;
             this.btn_renew.Click += new System.EventHandler(this.btn_renew_Click);
             // 
             // btn_erase_ret
             // 
-            this.btn_erase_ret.Location = new System.Drawing.Point(361, 14);
+            resources.ApplyResources(this.btn_erase_ret, "btn_erase_ret");
             this.btn_erase_ret.Name = "btn_erase_ret";
-            this.btn_erase_ret.Size = new System.Drawing.Size(75, 23);
-            this.btn_erase_ret.TabIndex = 12;
-            this.btn_erase_ret.Text = "Erase item";
             this.btn_erase_ret.UseVisualStyleBackColor = true;
-            this.btn_erase_ret.Visible = false;
             this.btn_erase_ret.Click += new System.EventHandler(this.btn_erase_ret_Click);
             // 
             // btn_erase_bor
             // 
-            this.btn_erase_bor.Location = new System.Drawing.Point(70, 13);
+            resources.ApplyResources(this.btn_erase_bor, "btn_erase_bor");
             this.btn_erase_bor.Name = "btn_erase_bor";
-            this.btn_erase_bor.Size = new System.Drawing.Size(75, 23);
-            this.btn_erase_bor.TabIndex = 11;
-            this.btn_erase_bor.Text = "Erase item";
             this.btn_erase_bor.UseVisualStyleBackColor = true;
-            this.btn_erase_bor.Visible = false;
             this.btn_erase_bor.Click += new System.EventHandler(this.btn_erase_bor_Click);
             // 
             // btn_clean
             // 
-            this.btn_clean.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_clean.Location = new System.Drawing.Point(615, 270);
+            resources.ApplyResources(this.btn_clean, "btn_clean");
             this.btn_clean.Name = "btn_clean";
-            this.btn_clean.Size = new System.Drawing.Size(513, 23);
-            this.btn_clean.TabIndex = 10;
-            this.btn_clean.Text = "Clear all items";
             this.btn_clean.UseVisualStyleBackColor = true;
             this.btn_clean.Click += new System.EventHandler(this.btn_clean_Click);
             // 
             // txt_barcode
             // 
-            this.txt_barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.txt_barcode, "txt_barcode");
             this.txt_barcode.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txt_barcode.Location = new System.Drawing.Point(615, 42);
             this.txt_barcode.Name = "txt_barcode";
-            this.txt_barcode.Size = new System.Drawing.Size(170, 20);
-            this.txt_barcode.TabIndex = 8;
-            this.txt_barcode.Text = "Click here when scanning books...";
             this.txt_barcode.Enter += new System.EventHandler(this.txt_barcode_Enter);
             this.txt_barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_barcode_KeyDown);
             this.txt_barcode.Leave += new System.EventHandler(this.txt_barcode_Leave);
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(302, 19);
+            resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "To return:";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 19);
+            resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(58, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "To borrow:";
             // 
             // btn_process
             // 
-            this.btn_process.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_process.Location = new System.Drawing.Point(615, 68);
+            resources.ApplyResources(this.btn_process, "btn_process");
             this.btn_process.Name = "btn_process";
-            this.btn_process.Size = new System.Drawing.Size(513, 202);
-            this.btn_process.TabIndex = 6;
-            this.btn_process.Text = "Borrow/Return books";
             this.btn_process.UseVisualStyleBackColor = true;
             this.btn_process.Click += new System.EventHandler(this.button1_Click);
             // 
             // grp_booksava
             // 
-            this.grp_booksava.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.grp_booksava, "grp_booksava");
             this.grp_booksava.Controls.Add(this.label5);
             this.grp_booksava.Controls.Add(this.dgv_search);
             this.grp_booksava.Controls.Add(this.dgv_books);
@@ -419,102 +295,69 @@
             this.grp_booksava.Controls.Add(this.lbl_result);
             this.grp_booksava.Controls.Add(this.btn_search);
             this.grp_booksava.Controls.Add(this.txt_search);
-            this.grp_booksava.Location = new System.Drawing.Point(3, 16);
-            this.grp_booksava.Margin = new System.Windows.Forms.Padding(2, 3, 3, 3);
             this.grp_booksava.Name = "grp_booksava";
-            this.grp_booksava.Size = new System.Drawing.Size(1137, 353);
-            this.grp_booksava.TabIndex = 4;
             this.grp_booksava.TabStop = false;
-            this.grp_booksava.Text = "Available books:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
+            resources.ApplyResources(this.label5, "label5");
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(924, 43);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(181, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "*Red labeled books are not available";
             // 
             // dgv_search
             // 
             this.dgv_search.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_search.Location = new System.Drawing.Point(475, 30);
+            resources.ApplyResources(this.dgv_search, "dgv_search");
             this.dgv_search.MultiSelect = false;
             this.dgv_search.Name = "dgv_search";
             this.dgv_search.ReadOnly = true;
-            this.dgv_search.Size = new System.Drawing.Size(290, 317);
-            this.dgv_search.TabIndex = 14;
             this.dgv_search.Click += new System.EventHandler(this.dgv_search_Click);
             // 
             // dgv_books
             // 
             this.dgv_books.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_books.Location = new System.Drawing.Point(9, 16);
+            resources.ApplyResources(this.dgv_books, "dgv_books");
             this.dgv_books.MultiSelect = false;
             this.dgv_books.Name = "dgv_books";
             this.dgv_books.ReadOnly = true;
-            this.dgv_books.Size = new System.Drawing.Size(457, 331);
-            this.dgv_books.TabIndex = 13;
             this.dgv_books.Click += new System.EventHandler(this.dgv_books_Click);
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(472, 16);
+            resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 13);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "Serach result:";
             // 
             // lbl_welcome
             // 
-            this.lbl_welcome.AutoSize = true;
-            this.lbl_welcome.Location = new System.Drawing.Point(743, 20);
+            resources.ApplyResources(this.lbl_welcome, "lbl_welcome");
             this.lbl_welcome.Name = "lbl_welcome";
-            this.lbl_welcome.Size = new System.Drawing.Size(0, 13);
-            this.lbl_welcome.TabIndex = 9;
             // 
             // lbl_result
             // 
-            this.lbl_result.AutoSize = true;
-            this.lbl_result.Location = new System.Drawing.Point(740, 294);
+            resources.ApplyResources(this.lbl_result, "lbl_result");
             this.lbl_result.Name = "lbl_result";
-            this.lbl_result.Size = new System.Drawing.Size(0, 13);
-            this.lbl_result.TabIndex = 8;
             // 
             // btn_search
             // 
-            this.btn_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_search.Location = new System.Drawing.Point(1042, 328);
+            resources.ApplyResources(this.btn_search, "btn_search");
             this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(75, 20);
-            this.btn_search.TabIndex = 7;
-            this.btn_search.Text = "Search";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // txt_search
             // 
-            this.txt_search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_search.Location = new System.Drawing.Point(771, 327);
+            resources.ApplyResources(this.txt_search, "txt_search");
             this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(265, 20);
-            this.txt_search.TabIndex = 6;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1346, 725);
             this.Controls.Add(this.grp_booklist);
             this.Controls.Add(this.grp_bookinfo);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
-            this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);

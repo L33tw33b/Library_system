@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,7 @@ namespace library_sys
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -47,13 +48,14 @@ namespace library_sys
                     }
                     else
                     {
-                        Global.GlobalVar = txt_user.Text;
                         dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
-                            this.Hide();
-                            Form1 fm1 = new Form1(Convert.ToInt32(dr["u_Borrow_number"].ToString()), Convert.ToInt32(dr["u_Is_admin"].ToString()));
+                            Form1 fm1 = new Form1(Convert.ToInt32(dr["u_Borrow_number"].ToString()), Convert.ToInt32(dr["u_Is_admin"].ToString()), txt_user.Text.Trim());
                             fm1.Show();
+                            this.Hide();
+                            
+                            
                         }
 
                     }
@@ -71,6 +73,19 @@ namespace library_sys
         {
             Registercs registerfrm = new Registercs();
             registerfrm.Show();
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            Application.Exit();
+        }
+
+        private void btn_lang_Click(object sender, EventArgs e)
+        {
+            LangForm lang = new LangForm();
+            this.Hide();
+            lang.Show();
         }
     }
 }
