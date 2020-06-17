@@ -163,9 +163,23 @@ namespace library_sys
                         MySqlCommand cmd = new MySqlCommand("SELECT * FROM books WHERE b_Barcode = '" + txt_barcode.Text + "'", mysqlcon);
                         cmd.CommandType = CommandType.Text;
                         MySqlDataReader dr = cmd.ExecuteReader();
-                        if(dr.Read())
+                    if (dr.Read())
+                    {
+                        if (dr["b_Borrowed_by"] != System.DBNull.Value && currentuser != dr["b_Borrowed_by"].ToString())
                         {
-                            for (int i = 0; i < dgvborrow_rows; i++) 
+                            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                            {
+                                case "zh-HK":
+                                    MessageBox.Show("項目己掃描.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    break;
+                                case "en-US":
+                                    MessageBox.Show("Item was borrowed by another personel, please contact the admin", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < dgvborrow_rows; i++)
                             {
                                 if (dgv_borrow.Rows[i].Cells[0].Value.Equals(dr["b_Title"])) { exist = true; }
                             }
@@ -175,42 +189,54 @@ namespace library_sys
                             }
                             if (exist)
                             {
-                                MessageBox.Show("項目己掃描.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                
-                            } else
-                            {   
-                            if (dr["b_Borrowed_by"] == System.DBNull.Value)
-                            {
-                                if (borrowamount > 0)
+                                switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
                                 {
-                                    dgv_borrow.Rows.Add(dr["b_Title"]);
-                                    borrowamount--;
+                                    case "zh-HK":
+                                        MessageBox.Show("項目己掃描.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        break;
+                                    case "en-US":
+                                        MessageBox.Show("Item has already been scanned.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        break;
                                 }
-                                else
-                                {
-                                    switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
-                                    {
-                                        case "zh-HK":
-                                            MessageBox.Show("你不可借閱多於2本書.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            break;
-                                        case "en-US":
-                                            MessageBox.Show("You cannot borrow more than 2 books.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            break;
-                                    }
-                                    
-                                }
+
 
                             }
                             else
                             {
-                                dgv_return.Rows.Add(dr["b_Title"], dr["b_renewed"], dr["b_Due_Date"]);
-                            }
+                                if (dr["b_Borrowed_by"] == System.DBNull.Value)
+                                {
+                                    if (borrowamount > 0)
+                                    {
+                                        dgv_borrow.Rows.Add(dr["b_Title"]);
+                                        borrowamount--;
+                                    }
+                                    else
+                                    {
+                                        switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                                        {
+                                            case "zh-HK":
+                                                MessageBox.Show("你不可借閱多於2本書.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                break;
+                                            case "en-US":
+                                                MessageBox.Show("You cannot borrow more than 2 books.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                break;
+                                        }
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    dgv_return.Rows.Add(dr["b_Title"], dr["b_renewed"], dr["b_Due_Date"]);
+                                    borrowamount++;
+                                }
 
                             }
 
-                        }   
-                else
-                {
+                        }
+                    }
+                    else
+                    {
                         switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
                         {
                             case "zh-HK":
@@ -221,8 +247,8 @@ namespace library_sys
                                 break;
                         }
 
-                        
-                }
+
+                    }
                     mysqlcon.Close();
                     txt_barcode.SelectAll();
                 }
@@ -376,7 +402,7 @@ namespace library_sys
                     message = $"Delete {delamountret} from borrow list?";
                     break;
             }
-            if (MessageBox.Show($"從退還清單清除{delamountret}本書?", "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(message, "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try {
                     dgv_return.Rows.RemoveAt(this.dgv_return.SelectedRows[0].Index);

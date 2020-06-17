@@ -45,6 +45,7 @@
             this.btn_udel = new System.Windows.Forms.Button();
             this.btn_uadd = new System.Windows.Forms.Button();
             this.grp_booksop = new System.Windows.Forms.GroupBox();
+            this.btn_return = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
             this.txt_seq = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -77,7 +78,6 @@
             this.btn_usearch = new System.Windows.Forms.Button();
             this.txt_usearch = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.btn_return = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvuser)).BeginInit();
             this.grp_userop.SuspendLayout();
             this.grp_booksop.SuspendLayout();
@@ -271,6 +271,16 @@
             this.grp_booksop.TabIndex = 2;
             this.grp_booksop.TabStop = false;
             this.grp_booksop.Text = "Books option";
+            // 
+            // btn_return
+            // 
+            this.btn_return.Location = new System.Drawing.Point(250, 276);
+            this.btn_return.Name = "btn_return";
+            this.btn_return.Size = new System.Drawing.Size(75, 23);
+            this.btn_return.TabIndex = 28;
+            this.btn_return.Text = "Return book";
+            this.btn_return.UseVisualStyleBackColor = true;
+            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
             // 
             // btn_clear
             // 
@@ -520,6 +530,7 @@
             this.txt_search.Name = "txt_search";
             this.txt_search.Size = new System.Drawing.Size(200, 20);
             this.txt_search.TabIndex = 29;
+            this.txt_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyDown);
             // 
             // button1
             // 
@@ -547,6 +558,7 @@
             this.txt_usearch.Name = "txt_usearch";
             this.txt_usearch.Size = new System.Drawing.Size(200, 20);
             this.txt_usearch.TabIndex = 32;
+            this.txt_usearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_usearch_KeyDown);
             // 
             // label12
             // 
@@ -556,16 +568,6 @@
             this.label12.Size = new System.Drawing.Size(69, 13);
             this.label12.TabIndex = 30;
             this.label12.Text = "User Search:";
-            // 
-            // btn_return
-            // 
-            this.btn_return.Location = new System.Drawing.Point(250, 276);
-            this.btn_return.Name = "btn_return";
-            this.btn_return.Size = new System.Drawing.Size(75, 23);
-            this.btn_return.TabIndex = 28;
-            this.btn_return.Text = "Return book";
-            this.btn_return.UseVisualStyleBackColor = true;
-            this.btn_return.Click += new System.EventHandler(this.btn_return_Click);
             // 
             // Form3
             // 
@@ -582,8 +584,10 @@
             this.Controls.Add(this.grp_booksop);
             this.Controls.Add(this.grp_userop);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form3";
             this.Text = "Form3";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvuser)).EndInit();
             this.grp_userop.ResumeLayout(false);

@@ -284,15 +284,19 @@ namespace library_sys
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.AddWithValue("_Title", txt_title.Text.Trim());
                             cmd.Parameters.AddWithValue("_Borrowed_by", dgvbook.CurrentRow.Cells[11].Value.ToString());
+                            cmd.ExecuteNonQuery();
                             MessageBox.Show("Process complete.");
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Book Title may not exist! \n" + ex.Message);
                         }
-
+                        mysqlcon.Close();
                     }
+                    
                 }
+                Clear(grp_booksop);
+                GridFill("BookViewAll", dgvbook);
             }
         }
         private void dgvbook_Click(object sender, EventArgs e)
@@ -326,6 +330,60 @@ namespace library_sys
                 txt_rName.Text = dgvuser.CurrentRow.Cells[7].Value.ToString();
 
             }
+        }
+
+        private void txt_search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+                {
+                    if (txt_search.Text != null)
+                    {
+                        mysqlcon.Open();
+                        MySqlDataAdapter da = new MySqlDataAdapter("SearchByValue", mysqlcon);
+                        da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        da.SelectCommand.Parameters.AddWithValue("_SearchValue", txt_search.Text);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dgvbook.DataSource = dt;
+                        dgvbook.Columns[0].Visible = false;
+                    }
+                    else
+                    {
+                        mysqlcon.Open();
+                        GridFill("BookViewAll", dgvbook);
+                    }
+
+                    mysqlcon.Close();
+                }
+            }
+        }
+
+        private void txt_usearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter) {
+                using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+                {
+                    if (txt_search.Text != null)
+                    {
+                        mysqlcon.Open();
+                        MySqlDataAdapter da = new MySqlDataAdapter("SearchByValueUser", mysqlcon);
+                        da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                        da.SelectCommand.Parameters.AddWithValue("_SearchValue", txt_usearch.Text);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dgvuser.DataSource = dt;
+                        dgvuser.Columns[0].Visible = false;
+                    }
+                    else
+                    {
+                        GridFill("UserViewAll", dgvbook);
+                    }
+                    mysqlcon.Close();
+
+                }
+            }
+
         }
     }
 }
