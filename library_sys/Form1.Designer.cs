@@ -348,6 +348,7 @@
             // 
             resources.ApplyResources(this.txt_search, "txt_search");
             this.txt_search.Name = "txt_search";
+            this.txt_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_search_KeyDown);
             // 
             // Form1
             // 

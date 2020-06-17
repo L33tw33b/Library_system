@@ -726,54 +726,6 @@
   <data name="grp_booklist.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;grp_booksscan.Name" xml:space="preserve">
-    <value>grp_booksscan</value>
-  </data>
-  <data name="&gt;&gt;grp_booksscan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grp_booksscan.Parent" xml:space="preserve">
-    <value>grp_booklist</value>
-  </data>
-  <data name="&gt;&gt;grp_booksscan.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.Name" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.Parent" xml:space="preserve">
-    <value>grp_booklist</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="grp_booklist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 51</value>
-  </data>
-  <data name="grp_booklist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1143, 674</value>
-  </data>
-  <data name="grp_booklist.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="grp_booklist.Text" xml:space="preserve">
-    <value>Book List</value>
-  </data>
-  <data name="&gt;&gt;grp_booklist.Name" xml:space="preserve">
-    <value>grp_booklist</value>
-  </data>
-  <data name="&gt;&gt;grp_booklist.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grp_booklist.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grp_booklist.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="grp_booksscan.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -922,6 +874,255 @@
     <value>grp_booklist</value>
   </data>
   <data name="&gt;&gt;grp_booksscan.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grp_booksava.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>924, 43</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 13</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>*Red labeled books are not available</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dgv_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>475, 30</value>
+  </data>
+  <data name="dgv_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>290, 317</value>
+  </data>
+  <data name="dgv_search.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;dgv_search.Name" xml:space="preserve">
+    <value>dgv_search</value>
+  </data>
+  <data name="&gt;&gt;dgv_search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgv_search.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;dgv_search.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dgv_books.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 16</value>
+  </data>
+  <data name="dgv_books.Size" type="System.Drawing.Size, System.Drawing">
+    <value>457, 331</value>
+  </data>
+  <data name="dgv_books.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;dgv_books.Name" xml:space="preserve">
+    <value>dgv_books</value>
+  </data>
+  <data name="&gt;&gt;dgv_books.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgv_books.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;dgv_books.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>472, 16</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 13</value>
+  </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Serach result:</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lbl_welcome.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbl_welcome.Location" type="System.Drawing.Point, System.Drawing">
+    <value>743, 20</value>
+  </data>
+  <data name="lbl_welcome.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lbl_welcome.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;lbl_welcome.Name" xml:space="preserve">
+    <value>lbl_welcome</value>
+  </data>
+  <data name="&gt;&gt;lbl_welcome.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_welcome.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;lbl_welcome.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lbl_result.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbl_result.Location" type="System.Drawing.Point, System.Drawing">
+    <value>740, 294</value>
+  </data>
+  <data name="lbl_result.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lbl_result.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lbl_result.Name" xml:space="preserve">
+    <value>lbl_result</value>
+  </data>
+  <data name="&gt;&gt;lbl_result.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_result.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;lbl_result.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1042, 328</value>
+  </data>
+  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="btn_search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
+    <value>btn_search</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_search.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="txt_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>771, 327</value>
+  </data>
+  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 20</value>
+  </data>
+  <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
+    <value>txt_search</value>
+  </data>
+  <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grp_booksava.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="grp_booksava.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 3, 3</value>
+  </data>
+  <data name="grp_booksava.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1137, 353</value>
+  </data>
+  <data name="grp_booksava.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grp_booksava.Text" xml:space="preserve">
+    <value>Available books:</value>
+  </data>
+  <data name="&gt;&gt;grp_booksava.Name" xml:space="preserve">
+    <value>grp_booksava</value>
+  </data>
+  <data name="&gt;&gt;grp_booksava.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grp_booksava.Parent" xml:space="preserve">
+    <value>grp_booklist</value>
+  </data>
+  <data name="&gt;&gt;grp_booksava.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grp_booklist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 51</value>
+  </data>
+  <data name="grp_booklist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1143, 674</value>
+  </data>
+  <data name="grp_booklist.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grp_booklist.Text" xml:space="preserve">
+    <value>Book List</value>
+  </data>
+  <data name="&gt;&gt;grp_booklist.Name" xml:space="preserve">
+    <value>grp_booklist</value>
+  </data>
+  <data name="&gt;&gt;grp_booklist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grp_booklist.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grp_booklist.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="dgv_return.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1187,327 +1388,6 @@
   </data>
   <data name="&gt;&gt;btn_process.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="grp_booksava.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.Name" xml:space="preserve">
-    <value>dgv_search</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.Name" xml:space="preserve">
-    <value>dgv_books</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
-  </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.Name" xml:space="preserve">
-    <value>lbl_welcome</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.Name" xml:space="preserve">
-    <value>lbl_result</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
-    <value>btn_search</value>
-  </data>
-  <data name="&gt;&gt;btn_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_search.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
-    <value>txt_search</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="grp_booksava.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="grp_booksava.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 3, 3</value>
-  </data>
-  <data name="grp_booksava.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1137, 353</value>
-  </data>
-  <data name="grp_booksava.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="grp_booksava.Text" xml:space="preserve">
-    <value>Available books:</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.Name" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.Parent" xml:space="preserve">
-    <value>grp_booklist</value>
-  </data>
-  <data name="&gt;&gt;grp_booksava.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>924, 43</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 13</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>*Red labeled books are not available</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="dgv_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>475, 30</value>
-  </data>
-  <data name="dgv_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 317</value>
-  </data>
-  <data name="dgv_search.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.Name" xml:space="preserve">
-    <value>dgv_search</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;dgv_search.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="dgv_books.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 16</value>
-  </data>
-  <data name="dgv_books.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 331</value>
-  </data>
-  <data name="dgv_books.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.Name" xml:space="preserve">
-    <value>dgv_books</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;dgv_books.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>472, 16</value>
-  </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Serach result:</value>
-  </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
-  </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="lbl_welcome.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbl_welcome.Location" type="System.Drawing.Point, System.Drawing">
-    <value>743, 20</value>
-  </data>
-  <data name="lbl_welcome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
-  </data>
-  <data name="lbl_welcome.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.Name" xml:space="preserve">
-    <value>lbl_welcome</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;lbl_welcome.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lbl_result.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbl_result.Location" type="System.Drawing.Point, System.Drawing">
-    <value>740, 294</value>
-  </data>
-  <data name="lbl_result.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
-  </data>
-  <data name="lbl_result.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.Name" xml:space="preserve">
-    <value>lbl_result</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;lbl_result.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="btn_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1042, 328</value>
-  </data>
-  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="&gt;&gt;btn_search.Name" xml:space="preserve">
-    <value>btn_search</value>
-  </data>
-  <data name="&gt;&gt;btn_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_search.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;btn_search.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="txt_search.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>771, 327</value>
-  </data>
-  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 20</value>
-  </data>
-  <data name="txt_search.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Name" xml:space="preserve">
-    <value>txt_search</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
-    <value>grp_booksava</value>
-  </data>
-  <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -557,5 +557,27 @@ namespace library_sys
         {
 
         }
+
+        private void txt_search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+                {
+                    if (txt_search.Text != null && !string.IsNullOrWhiteSpace(txt_search.Text))
+                    {
+                        mysqlcon.Open();
+                        GridFill("SearchByValue", dgv_search);
+                    }
+                    else
+                    {
+
+                        dgv_search.Columns.Clear();
+
+                    }
+
+
+                }
+            }
+        }
     }
 }
