@@ -30,6 +30,9 @@
         {
             this.dgvuser = new System.Windows.Forms.DataGridView();
             this.grp_userop = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txt_uid = new System.Windows.Forms.TextBox();
             this.btn_giveadmin = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.txt_rName = new System.Windows.Forms.TextBox();
@@ -47,7 +50,6 @@
             this.grp_booksop = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.txt_bid = new System.Windows.Forms.TextBox();
             this.btn_return = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
             this.txt_seq = new System.Windows.Forms.TextBox();
@@ -81,9 +83,7 @@
             this.btn_usearch = new System.Windows.Forms.Button();
             this.txt_usearch = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txt_uid = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
+            this.txt_bid = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvuser)).BeginInit();
             this.grp_userop.SuspendLayout();
             this.grp_booksop.SuspendLayout();
@@ -133,6 +133,33 @@
             this.grp_userop.TabIndex = 1;
             this.grp_userop.TabStop = false;
             this.grp_userop.Text = "Users options";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.Red;
+            this.label22.Location = new System.Drawing.Point(44, 277);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(174, 13);
+            this.label22.TabIndex = 32;
+            this.label22.Text = "*UID should = 0 when adding users";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 277);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 13);
+            this.label21.TabIndex = 47;
+            this.label21.Text = "UID:";
+            // 
+            // txt_uid
+            // 
+            this.txt_uid.Location = new System.Drawing.Point(9, 293);
+            this.txt_uid.Name = "txt_uid";
+            this.txt_uid.Size = new System.Drawing.Size(100, 20);
+            this.txt_uid.TabIndex = 46;
+            this.txt_uid.Validated += new System.EventHandler(this.txt_uid_Validated);
             // 
             // btn_giveadmin
             // 
@@ -259,9 +286,9 @@
             this.grp_booksop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grp_booksop.Controls.Add(this.txt_bid);
             this.grp_booksop.Controls.Add(this.label19);
             this.grp_booksop.Controls.Add(this.label18);
-            this.grp_booksop.Controls.Add(this.txt_bid);
             this.grp_booksop.Controls.Add(this.btn_return);
             this.grp_booksop.Controls.Add(this.btn_clear);
             this.grp_booksop.Controls.Add(this.txt_seq);
@@ -313,18 +340,9 @@
             this.label18.TabIndex = 30;
             this.label18.Text = "BID:";
             // 
-            // txt_bid
-            // 
-            this.txt_bid.Location = new System.Drawing.Point(112, 212);
-            this.txt_bid.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
-            this.txt_bid.Name = "txt_bid";
-            this.txt_bid.Size = new System.Drawing.Size(100, 20);
-            this.txt_bid.TabIndex = 29;
-            // 
             // btn_return
             // 
-            this.btn_return.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_return.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_return.Location = new System.Drawing.Point(250, 276);
             this.btn_return.Name = "btn_return";
             this.btn_return.Size = new System.Drawing.Size(75, 23);
@@ -335,8 +353,7 @@
             // 
             // btn_clear
             // 
-            this.btn_clear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_clear.Location = new System.Drawing.Point(168, 276);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(75, 23);
@@ -518,8 +535,7 @@
             // 
             // btn_del
             // 
-            this.btn_del.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_del.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_del.Location = new System.Drawing.Point(87, 276);
             this.btn_del.Name = "btn_del";
             this.btn_del.Size = new System.Drawing.Size(75, 23);
@@ -530,8 +546,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_add.Location = new System.Drawing.Point(6, 276);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(75, 23);
@@ -635,31 +650,13 @@
             this.label12.TabIndex = 30;
             this.label12.Text = "User Search:";
             // 
-            // label21
+            // txt_bid
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(9, 277);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(29, 13);
-            this.label21.TabIndex = 47;
-            this.label21.Text = "UID:";
-            // 
-            // txt_uid
-            // 
-            this.txt_uid.Location = new System.Drawing.Point(9, 293);
-            this.txt_uid.Name = "txt_uid";
-            this.txt_uid.Size = new System.Drawing.Size(100, 20);
-            this.txt_uid.TabIndex = 46;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.ForeColor = System.Drawing.Color.Red;
-            this.label22.Location = new System.Drawing.Point(44, 277);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(174, 13);
-            this.label22.TabIndex = 32;
-            this.label22.Text = "*UID should = 0 when adding users";
+            this.txt_bid.Location = new System.Drawing.Point(112, 212);
+            this.txt_bid.Name = "txt_bid";
+            this.txt_bid.Size = new System.Drawing.Size(100, 20);
+            this.txt_bid.TabIndex = 33;
+            this.txt_bid.Validated += new System.EventHandler(this.txt_bid_Validated);
             // 
             // Form3
             // 
@@ -679,7 +676,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form3";
             this.Text = "Form3";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvuser)).EndInit();
             this.grp_userop.ResumeLayout(false);
@@ -745,10 +741,10 @@
         private System.Windows.Forms.Button btn_giveadmin;
         private System.Windows.Forms.Button btn_return;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox txt_bid;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox txt_uid;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txt_bid;
     }
 }

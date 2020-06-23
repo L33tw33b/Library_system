@@ -406,6 +406,7 @@ namespace library_sys
             {
                 try {
                     dgv_return.Rows.RemoveAt(this.dgv_return.SelectedRows[0].Index);
+                    borrowamount -= delamountret;
                 } catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
@@ -442,29 +443,40 @@ namespace library_sys
                     MySqlCommand cmd = new MySqlCommand("RenewBook", mysqlcon);
                     cmd.CommandType = CommandType.StoredProcedure;
                     DateTime today = DateTime.Now;
-                    foreach (DataGridViewRow listboxitems in dgv_return.SelectedRows)
+                    try
                     {
-                        DateTime old_due = Convert.ToDateTime(listboxitems.Cells[2].Value.ToString());
-                        if ((listboxitems.Cells[1].Value.ToString() == "0") && (old_due > today.Date)) {
-                        DateTime new_due_date = DateTime.Today.AddDays(14);
-                        cmd.Parameters.AddWithValue("_New_Date", new_due_date.ToString("yyyy-MM-dd H:mm:ss"));
-                        cmd.Parameters.AddWithValue("_b_Title", listboxitems.Cells[0].Value.ToString());
-                        dgv_return.Rows.Remove(listboxitems);
-                        cmd.ExecuteNonQuery();
-                    } else 
+                        foreach (DataGridViewRow listboxitems in dgv_return.SelectedRows)
                         {
-                            switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+
+                            DateTime old_due = Convert.ToDateTime(listboxitems.Cells[2].Value.ToString());
+                            if ((listboxitems.Cells[1].Value.ToString() == "0") && (old_due > today.Date))
                             {
-                                case "zh-HK":
-                                    errmess = $"{listboxitems.ToString()} 不可續借,因為已經被更新或超過了到止日期。";
-                                    break;
-                                case "en-US":
-                                    errmess = $"{listboxitems.ToString()} cannot be renewed as it has already been renewed or exceed due date.";
-                                    break;
+                                DateTime new_due_date = DateTime.Today.AddDays(14);
+                                cmd.Parameters.AddWithValue("_New_Date", new_due_date.ToString("yyyy-MM-dd H:mm:ss"));
+                                cmd.Parameters.AddWithValue("_b_Title", listboxitems.Cells[0].Value.ToString());
+                                dgv_return.Rows.Remove(listboxitems);
+                                borrowamount -= renewamount;
+                                cmd.ExecuteNonQuery();
                             }
-                        MessageBox.Show(errmess); 
+                            else
+                            {
+                                switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                                {
+                                    case "zh-HK":
+                                        errmess = $"{listboxitems.ToString()} 不可續借,因為已經被更新或超過了到止日期。";
+                                        break;
+                                    case "en-US":
+                                        errmess = $"{listboxitems.ToString()} cannot be renewed as it has already been renewed or exceed due date.";
+                                        break;
+                                }
+                                MessageBox.Show(errmess);
+                            }
                         }
                     }
+                    catch (Exception ex) {
+                        MessageBox.Show(ex.Message);
+                    }
+
 
                     MessageBox.Show(endmessage);
                     GridFill("BookViewAll", dgv_books);
@@ -490,7 +502,7 @@ namespace library_sys
             try
             {
 
-                if (dgv_return.CurrentRow.Index != 1 && dgv_return.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
+                if (dgv_return.CurrentRow.Index != -1 && dgv_return.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
 
                 {
                     btn_erase_ret.Visible = true;
@@ -512,7 +524,7 @@ namespace library_sys
         {
             try
             {
-                if (dgv_borrow.CurrentRow.Index != 1 && dgv_borrow.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
+                if (dgv_borrow.CurrentRow.Index != -1 && dgv_borrow.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
                 {
                     btn_erase_bor.Visible = true;
                 }

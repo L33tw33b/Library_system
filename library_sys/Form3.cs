@@ -14,7 +14,6 @@ namespace library_sys
     public partial class Form3 : Form
     {
         string connection = @"Server=localhost;Database=library;Uid=root;pwd=root;";
-        int uid = 0;
         public Form3()
         {
             InitializeComponent();
@@ -49,7 +48,7 @@ namespace library_sys
                         mysqlcon.Open();
                         MySqlCommand cmd = new MySqlCommand("AddOrEdit", mysqlcon);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("_BID", Convert.ToInt32(txt_bid.Text));
+                        cmd.Parameters.AddWithValue("_BID", Convert.ToInt32(txt_bid.Text.Trim()));
                         cmd.Parameters.AddWithValue("_Seq", txt_seq.Text.Trim());
                         cmd.Parameters.AddWithValue("_Subject", txt_sub.Text.Trim());
                         cmd.Parameters.AddWithValue("_ISBN", txt_isbn.Text.Trim());
@@ -198,7 +197,7 @@ namespace library_sys
                         mysqlcon.Open();
                         MySqlCommand cmd = new MySqlCommand("AddOrEditUser", mysqlcon);
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("_ID", uid);
+                        cmd.Parameters.AddWithValue("_ID", Convert.ToInt32(txt_uid.Text.Trim()));
                         cmd.Parameters.AddWithValue("_Name", txt_u_name.Text.Trim());
                         cmd.Parameters.AddWithValue("_Email", txt_u_email.Text.Trim());
                         cmd.Parameters.AddWithValue("_Contact_no", txt_u_contact.Text.Trim());
@@ -458,6 +457,21 @@ namespace library_sys
         {
             Clear(grp_userop);
             txt_uid.Text = "0";
+        }
+
+        private void txt_bid_Validated(object sender, EventArgs e)
+        {
+            if (txt_bid.Text == "") {
+                txt_bid.Text = "0";
+            }
+        }
+
+        private void txt_uid_Validated(object sender, EventArgs e)
+        {
+            if (txt_uid.Text == "")
+            {
+                txt_uid.Text = "0";
+            }
         }
     }
 }
