@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace library_sys
         int adminval = 0; // Is admin or not
         int iniamount = 0; // Initial amount of books borrowed;
         string currentuser;
-        string connection = @"Server=localhost;Database=library;Uid=root;pwd=root;";
+        string connection = ConfigurationManager.ConnectionStrings["library_sys.Properties.Settings.Setting"].ConnectionString;
         Form2 fm2 = new Form2();       
         public Form1(int value,int admin, string user)
         {

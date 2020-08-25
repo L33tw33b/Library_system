@@ -5,3 +5,5 @@
 
 **/[Pp]ackages/
 
+#Ignored files
+*.config

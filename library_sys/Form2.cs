@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace library_sys
 
     public partial class Form2 : Form
     {
-        string connection = @"Server=localhost;Database=library;Uid=root;pwd=root;";
+        string connection = ConfigurationManager.ConnectionStrings["library_sys.Properties.Settings.Setting"].ConnectionString;
         int i;
 
 
