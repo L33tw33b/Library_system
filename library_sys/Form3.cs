@@ -342,7 +342,7 @@ namespace library_sys
         private void dgvbook_Click(object sender, EventArgs e)
         {
 
-            if (dgvbook.CurrentRow.Index != -1)
+            if (dgvbook.CurrentCell != null)
             {
                 txt_seq.Text = dgvbook.CurrentRow.Cells[1].Value.ToString();
                 txt_sub.Text = dgvbook.CurrentRow.Cells[2].Value.ToString();
@@ -361,7 +361,7 @@ namespace library_sys
 
         private void dgvuser_Click(object sender, EventArgs e)
         {
-            if (dgvuser.CurrentRow.Index != -1)
+            if (dgvuser.CurrentCell != null)
             {
 
                 txt_u_name.Text = dgvuser.CurrentRow.Cells[1].Value.ToString();

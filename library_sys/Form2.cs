@@ -73,6 +73,7 @@ namespace library_sys
         private void btn_reg_Click(object sender, EventArgs e)
         {
             Registercs registerfrm = new Registercs();
+            registerfrm.TopMost = true;
             registerfrm.Show();
         }
 

@@ -73,7 +73,7 @@ namespace library_sys
 
         void Fillinfo(DataGridView dgv) {
 
-            if (dgv.CurrentRow.Index != -1)
+            if (dgv.CurrentCell != null)
             {
                 txt_bookn.Text = dgv_books.CurrentRow.Cells[7].Value.ToString();
                 txt_auth.Text = dgv_books.CurrentRow.Cells[8].Value.ToString();
@@ -91,14 +91,34 @@ namespace library_sys
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (adminval == 0) {
+            StringBuilder list = new StringBuilder("");
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
+                mysqlcon.Open();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                MySqlCommand cmd = new MySqlCommand("select b_Title from books where b_Borrowed_by = '" + currentuser + "'", mysqlcon);
+                cmd.CommandType = CommandType.Text;
+                DataTable dt = new DataTable();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                da.Fill(dt);
+                int i = Convert.ToInt32(dt.Rows.Count.ToString());
+                foreach (DataRow row in dt.Rows) {
+                    foreach (var item in row.ItemArray) {
+                        list.Append(item.ToString() + "\n");
+                    }
+                }
+                mysqlcon.Close();
+
+            }
+
+                if (adminval == 0) {
                 btn_admin.Visible = false;
             }
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag) {
-                case "zh-HK": MessageBox.Show($"你可借 {borrowamount} 本書.");
+                case "zh-HK": MessageBox.Show($"你可借 {borrowamount} 本書. 你已借的書: \n{list}");
                     break;
                 case "en-US":
-                    MessageBox.Show($"You can borrow {borrowamount} books.");
+                    MessageBox.Show($"You can borrow {borrowamount} books. You've borrowed: \n{list}");
                     break;
             }
             
@@ -171,7 +191,7 @@ namespace library_sys
                             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
                             {
                                 case "zh-HK":
-                                    MessageBox.Show("項目己掃描.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    MessageBox.Show("書籍被其他人借閱,請聯絡管理員.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     break;
                                 case "en-US":
                                     MessageBox.Show("Item was borrowed by another personel, please contact the admin", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -432,7 +452,7 @@ namespace library_sys
                     endmessage = "Process complete.";
                     break;
             }      
-                if (MessageBox.Show($"續借{renewamount}本書?", "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(message, "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                 using (MySqlConnection mysqlcon = new MySqlConnection(connection))
                 {
@@ -503,7 +523,7 @@ namespace library_sys
             try
             {
 
-                if (dgv_return.CurrentRow.Index != -1 && dgv_return.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
+                if (dgv_return.CurrentCell != null && dgv_return.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
 
                 {
                     btn_erase_ret.Visible = true;
@@ -525,7 +545,7 @@ namespace library_sys
         {
             try
             {
-                if (dgv_borrow.CurrentRow.Index != -1 && dgv_borrow.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
+                if (dgv_borrow.CurrentCell != null && dgv_borrow.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
                 {
                     btn_erase_bor.Visible = true;
                 }
@@ -592,5 +612,7 @@ namespace library_sys
                 }
             }
         }
+
+
     }
 }

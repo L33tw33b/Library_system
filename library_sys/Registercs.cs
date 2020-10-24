@@ -17,7 +17,7 @@ namespace library_sys
         string connection = ConfigurationManager.ConnectionStrings["library_sys.Properties.Settings.Setting"].ConnectionString;
         int uid = 0;
         bool IsEmpty() {
-            if (String.IsNullOrEmpty(txt_uName.Text) || String.IsNullOrEmpty(txt_uPass.Text) || (String.IsNullOrEmpty(txt_uContact.Text) && String.IsNullOrEmpty(txt_uEmail.Text))) { 
+            if (String.IsNullOrEmpty(txt_uName.Text) || String.IsNullOrEmpty(txt_uPass.Text) || String.IsNullOrEmpty(txt_uRname.Text) || (String.IsNullOrEmpty(txt_uContact.Text) && String.IsNullOrEmpty(txt_uEmail.Text))) { 
                 return true;
             } else { 
                 return false;
@@ -56,7 +56,7 @@ namespace library_sys
                 dt.Load(dr);
                 i = Convert.ToInt32(dt.Rows.Count.ToString());
 
-                if (IsValidEmail(txt_uEmail.Text) && !String.IsNullOrEmpty(txt_uEmail.Text))
+                if (!IsValidEmail(txt_uEmail.Text) && !String.IsNullOrEmpty(txt_uEmail.Text))
                 {
                     MessageBox.Show("Invalid Email.");
                 }
