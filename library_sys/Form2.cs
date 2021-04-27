@@ -36,7 +36,10 @@ namespace library_sys
             using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
                 i = 0;
                 mysqlcon.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from registered_members where u_Name = '" + txt_user.Text + "' and u_Password = '" + txt_pass.Text + "'", mysqlcon);
+                String command = "select * from registered_members where u_Name = @name and u_Password = @password;";
+                MySqlCommand cmd = new MySqlCommand(command, mysqlcon);
+                cmd.Parameters.AddWithValue("@name", txt_user.Text);
+                cmd.Parameters.AddWithValue("@password", txt_pass.Text);
                 cmd.CommandType = CommandType.Text;
                 DataTable dt = new DataTable();
                 MySqlDataReader dr = cmd.ExecuteReader();

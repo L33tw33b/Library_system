@@ -260,7 +260,9 @@ namespace library_sys
                             try
                             {
                                 mysqlcon.Open();
-                                MySqlCommand cmd = new MySqlCommand("UPDATE registered_members SET u_Is_admin = 1 WHERE u_Name = '" + selecteduser + "';", mysqlcon);
+                                String command = "UPDATE registered_members SET u_Is_admin = 1 WHERE u_Name = @user;";
+                                MySqlCommand cmd = new MySqlCommand(command, mysqlcon);
+                                cmd.Parameters.AddWithValue("@user", selecteduser);
                                 cmd.CommandType = CommandType.Text;
                                 cmd.ExecuteNonQuery();
                                 MessageBox.Show("Privilege has been given.");
@@ -282,7 +284,9 @@ namespace library_sys
                             try
                             {
                                 mysqlcon.Open();
-                                MySqlCommand cmd = new MySqlCommand("UPDATE registered_members SET u_Is_admin = 0 WHERE u_Name = '" + selecteduser + "';", mysqlcon);
+                                String command = "UPDATE registered_members SET u_Is_admin = 0 WHERE u_Name = @user;";
+                                MySqlCommand cmd = new MySqlCommand(command, mysqlcon);
+                                cmd.Parameters.AddWithValue("@user", selecteduser);
                                 cmd.CommandType = CommandType.Text;
                                 cmd.ExecuteNonQuery();
                                 MessageBox.Show("Privilege has been taken.");

@@ -33,8 +33,32 @@ namespace library_sys
             currentuser = user;
         }
 
+        private void Fillrecord() {
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection))
+            {
+                mysqlcon.Open();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                String command = "select b_Title,b_Due_Date from books where b_Borrowed_by = @user;";
+                MySqlCommand cmd = new MySqlCommand(command, mysqlcon);
+                cmd.Parameters.AddWithValue("@user", currentuser);
+                cmd.CommandType = CommandType.Text;
+                DataTable dt = new DataTable();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                da.Fill(dt);
+                dgv_record.DataSource = dt;
+                mysqlcon.Close();
+                foreach (DataGridViewRow row in dgv_record.Rows)
+                {
+                    if (DateTime.Now >= Convert.ToDateTime(row.Cells[1].Value))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                }
+            }
+        }
 
-        void GridFill(string pro, DataGridView control)
+        private void GridFill(string pro, DataGridView control)
         {
             using (MySqlConnection mysqlcon = new MySqlConnection(connection))
             {
@@ -55,11 +79,11 @@ namespace library_sys
                 control.Columns[11].Visible = false;
                 control.Columns[12].Visible = false;
                 control.Columns[13].Visible = false;
-                
+                mysqlcon.Close();
             }
         }
 
-        void Clear(GroupBox grp)
+        private void Clear(GroupBox grp)
         {
             foreach (Control c in grp.Controls)
             {
@@ -71,7 +95,7 @@ namespace library_sys
             
         }
 
-        void Fillinfo(DataGridView dgv) {
+        private void Fillinfo(DataGridView dgv) {
 
             if (dgv.CurrentCell != null)
             {
@@ -91,22 +115,24 @@ namespace library_sys
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            StringBuilder list = new StringBuilder("");
+            //StringBuilder list = new StringBuilder("");
             using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
                 mysqlcon.Open();
-                MySqlDataAdapter da = new MySqlDataAdapter();
-                MySqlCommand cmd = new MySqlCommand("select b_Title from books where b_Borrowed_by = '" + currentuser + "'", mysqlcon);
+                /*MySqlDataAdapter da = new MySqlDataAdapter();
+                MySqlCommand cmd = new MySqlCommand("select b_Title,b_Due_Date from books where b_Borrowed_by = '" + currentuser + "'", mysqlcon);
                 cmd.CommandType = CommandType.Text;
                 DataTable dt = new DataTable();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
                 da.Fill(dt);
-                int i = Convert.ToInt32(dt.Rows.Count.ToString());
-                foreach (DataRow row in dt.Rows) {
+                dgv_record.DataSource = dt;*/
+                //int i = Convert.ToInt32(dt.Rows.Count.ToString());
+                /*foreach (DataRow row in dt.Rows) {
                     foreach (var item in row.ItemArray) {
                         list.Append(item.ToString() + "\n");
                     }
-                }
+                }*/
+
                 mysqlcon.Close();
 
             }
@@ -115,13 +141,13 @@ namespace library_sys
                 btn_admin.Visible = false;
             }
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag) {
-                case "zh-HK": MessageBox.Show($"你可借 {borrowamount} 本書. 你已借的書: \n{list}");
+                case "zh-HK": MessageBox.Show($"你可借 {borrowamount} 本書.");
                     break;
                 case "en-US":
-                    MessageBox.Show($"You can borrow {borrowamount} books. You've borrowed: \n{list}");
+                    MessageBox.Show($"You can borrow {borrowamount} books.");
                     break;
             }
-            
+            Fillrecord();
             txt_barcode.Focus();
             Clear(grp_booklist);
             GridFill("BookViewAll",dgv_books);
@@ -133,6 +159,8 @@ namespace library_sys
             dgv_return.Columns[0].Name = "Books";
             dgv_return.Columns[1].Name = "Renewed";
             dgv_return.Columns[2].Name = "Due Date";
+            dgv_record.Columns[0].Name = "Books";
+            dgv_record.Columns[1].Name = "Due Date";
             foreach (DataGridViewRow row in dgv_books.Rows) {
                 if (row.Cells[11].Value != System.DBNull.Value) {
                     row.DefaultCellStyle.BackColor = Color.Red;
@@ -178,11 +206,12 @@ namespace library_sys
                 {
                    
                         mysqlcon.Open();
+                        String command = "SELECT * FROM books WHERE b_Barcode = @barcode;";
                         int dgvborrow_rows = dgv_borrow.Rows.Count - 1;
                         int dgvreturn_rows = dgv_return.Rows.Count - 1;
                         bool exist = false;
-                        MySqlCommand cmd = new MySqlCommand("SELECT * FROM books WHERE b_Barcode = '" + txt_barcode.Text + "'", mysqlcon);
-                        cmd.CommandType = CommandType.Text;
+                        MySqlCommand cmd = new MySqlCommand(command, mysqlcon);
+                        cmd.Parameters.AddWithValue("@barcode", txt_barcode.Text);
                         MySqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -305,17 +334,19 @@ namespace library_sys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string message = "", endmessage = "";
+            string message = "", endmessage = "", logoff = "";
             int bor, ret;
             bor = dgv_borrow.Rows.Count - 1;
             ret = dgv_return.Rows.Count - 1;
             DateTime due_date = DateTime.Today.AddDays(14);
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag) {
                 case "zh-HK": message = $"你將要借{bor}本書及還{ret}本書.確定?";
-                    endmessage = "操作完成.";
+                    endmessage = "操作完成. \n 還書日期(如有): ";
+                    logoff = "登出?";
                     break;
                 case "en-US": message = $"You are about to borrow {bor} books and return {ret} books. Confirm?";
-                    endmessage = "Process complete.";
+                    endmessage = "Process complete. \n Return Due(if any): ";
+                    logoff = "Log off?";
                     break;
             }
             if (MessageBox.Show(message, "Books processing", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -349,16 +380,17 @@ namespace library_sys
                         }
                     }
                     mysqlcon.Close();
-                    MessageBox.Show(endmessage);
+                    MessageBox.Show(endmessage + due_date);
                     dgv_borrow.Rows.Clear();
                     dgv_return.Rows.Clear();
                     Clear(grp_booklist);
                     GridFill("BookViewAll", dgv_books);
-                    fm2.Show();
-                    this.Hide();
-                    
-                    
-                    
+                    Fillrecord();
+                    if (MessageBox.Show(logoff, "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                        fm2.Show();
+                        this.Hide();
+                    }
+           
                 }
 
             }
@@ -440,15 +472,19 @@ namespace library_sys
         private void btn_renew_Click(object sender, EventArgs e)
         {
             int renewamount = dgv_return.SelectedRows.Count;
-            string message = "", endmessage = "", errmess = "";
+            string message = "", endmessage = "", errmess = "", newdatemes = "", logoff = "";
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
                 case "zh-HK":
                     message = $"續借{renewamount}本書?";
+                    logoff = "登出?";
+                    newdatemes = "新還期: ";
                     endmessage = "操作完成.";
                     break;
                 case "en-US":
                     message = $"Renew {renewamount} books?";
+                    logoff = "Log off?";
+                    newdatemes = "Due date updated to: ";
                     endmessage = "Process complete.";
                     break;
             }      
@@ -478,6 +514,7 @@ namespace library_sys
                                 dgv_return.Rows.Remove(listboxitems);
                                 borrowamount -= renewamount;
                                 cmd.ExecuteNonQuery();
+                                MessageBox.Show(newdatemes + new_due_date.ToString());
                             }
                             else
                             {
@@ -501,7 +538,11 @@ namespace library_sys
 
                     MessageBox.Show(endmessage);
                     GridFill("BookViewAll", dgv_books);
-                    
+                    if (MessageBox.Show(logoff, "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        fm2.Show();
+                        this.Hide();
+                    }
                 }
             }
         }
@@ -613,6 +654,15 @@ namespace library_sys
             }
         }
 
+        /*private void btn_borrec_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection mysqlcon = new MySqlConnection(connection)) {
+                mysqlcon.Open();
+                String command = "SELECT b_Title,b_Due_Date FROM books WHERE b_Borrowed_by =  @user;";
 
+                MySqlCommand cmd = new MySqlCommand(command, mysqlcon);
+                mysqlcon.Close();
+            }
+        }*/
     }
 }

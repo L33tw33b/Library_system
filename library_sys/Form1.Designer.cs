@@ -32,6 +32,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.grp_bookinfo = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dgv_record = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_logoff = new System.Windows.Forms.Button();
             this.btn_admin = new System.Windows.Forms.Button();
@@ -68,6 +70,7 @@
             this.txt_search = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.grp_bookinfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_record)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.grp_booklist.SuspendLayout();
             this.grp_booksscan.SuspendLayout();
@@ -94,6 +97,8 @@
             // grp_bookinfo
             // 
             resources.ApplyResources(this.grp_bookinfo, "grp_bookinfo");
+            this.grp_bookinfo.Controls.Add(this.label11);
+            this.grp_bookinfo.Controls.Add(this.dgv_record);
             this.grp_bookinfo.Controls.Add(this.groupBox1);
             this.grp_bookinfo.Controls.Add(this.txt_pubyear);
             this.grp_bookinfo.Controls.Add(this.label7);
@@ -107,6 +112,18 @@
             this.grp_bookinfo.Controls.Add(this.label1);
             this.grp_bookinfo.Name = "grp_bookinfo";
             this.grp_bookinfo.TabStop = false;
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // dgv_record
+            // 
+            this.dgv_record.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dgv_record, "dgv_record");
+            this.dgv_record.Name = "dgv_record";
+            this.dgv_record.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -367,6 +384,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.grp_bookinfo.ResumeLayout(false);
             this.grp_bookinfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_record)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.grp_booklist.ResumeLayout(false);
             this.grp_booksscan.ResumeLayout(false);
@@ -420,6 +438,8 @@
         private System.Windows.Forms.DataGridView dgv_borrow;
         private System.Windows.Forms.DataGridView dgv_search;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridView dgv_record;
     }
 }
 
