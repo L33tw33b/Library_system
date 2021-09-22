@@ -120,6 +120,7 @@
             // 
             // dgv_record
             // 
+            this.dgv_record.AllowUserToAddRows = false;
             this.dgv_record.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dgv_record, "dgv_record");
             this.dgv_record.Name = "dgv_record";
@@ -229,16 +230,18 @@
             // 
             // dgv_return
             // 
+            this.dgv_return.AllowUserToAddRows = false;
             resources.ApplyResources(this.dgv_return, "dgv_return");
             this.dgv_return.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_return.MultiSelect = false;
             this.dgv_return.Name = "dgv_return";
             this.dgv_return.ReadOnly = true;
             this.dgv_return.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_return.Click += new System.EventHandler(this.dgv_return_Click);
+            this.dgv_return.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_return_CellClick);
             // 
             // dgv_borrow
             // 
+            this.dgv_borrow.AllowUserToAddRows = false;
             resources.ApplyResources(this.dgv_borrow, "dgv_borrow");
             this.dgv_borrow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_borrow.MultiSelect = false;
@@ -323,6 +326,7 @@
             // 
             // dgv_search
             // 
+            this.dgv_search.AllowUserToAddRows = false;
             this.dgv_search.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dgv_search, "dgv_search");
             this.dgv_search.MultiSelect = false;
@@ -332,6 +336,7 @@
             // 
             // dgv_books
             // 
+            this.dgv_books.AllowUserToAddRows = false;
             this.dgv_books.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dgv_books, "dgv_books");
             this.dgv_books.MultiSelect = false;

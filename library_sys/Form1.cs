@@ -50,7 +50,7 @@ namespace library_sys
                 mysqlcon.Close();
                 foreach (DataGridViewRow row in dgv_record.Rows)
                 {
-                    if (DateTime.Now >= Convert.ToDateTime(row.Cells[1].Value))
+                    if (DateTime.Now > Convert.ToDateTime(row.Cells[1].Value))
                     {
                         row.DefaultCellStyle.BackColor = Color.Yellow;
                     }
@@ -334,18 +334,22 @@ namespace library_sys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string message = "", endmessage = "", logoff = "";
+            string message = "", borrowmessage = "", logoff = "", toreturn = "", returnmessage = "";
             int bor, ret;
-            bor = dgv_borrow.Rows.Count - 1;
-            ret = dgv_return.Rows.Count - 1;
+            bor = dgv_borrow.Rows.Count;
+            ret = dgv_return.Rows.Count;
             DateTime due_date = DateTime.Today.AddDays(14);
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag) {
                 case "zh-HK": message = $"你將要借{bor}本書及還{ret}本書.確定?";
-                    endmessage = "操作完成. \n 還書日期(如有): ";
+                    returnmessage = "還書完成.";
+                    toreturn = "還書日期: ";
+                    borrowmessage = "已借閱 ";
                     logoff = "登出?";
                     break;
                 case "en-US": message = $"You are about to borrow {bor} books and return {ret} books. Confirm?";
-                    endmessage = "Process complete. \n Return Due(if any): ";
+                    returnmessage = "Successfully returned book.";
+                    toreturn = "Return Date: ";
+                    borrowmessage = "Borrowed";
                     logoff = "Log off?";
                     break;
             }
@@ -363,6 +367,7 @@ namespace library_sys
                                 da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", currentuser);
                                 da.SelectCommand.Parameters.AddWithValue("_Due_Date", due_date.ToString("yyyy-MM-dd H:mm:ss"));
                                 da.SelectCommand.ExecuteNonQuery();
+                                MessageBox.Show(borrowmessage+ item.Cells["books"].Value + toreturn + due_date);
                         }
 
 
@@ -372,15 +377,17 @@ namespace library_sys
                     {
                         if (item.Cells["Books"].Value != System.DBNull.Value)
                         {
-                                MySqlDataAdapter da = new MySqlDataAdapter("ReturnBook", mysqlcon);
-                                da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                                da.SelectCommand.Parameters.AddWithValue("_Title", item.Cells["Books"].Value);
-                                da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", currentuser);
-                                da.SelectCommand.ExecuteNonQuery();
+                            MySqlDataAdapter da = new MySqlDataAdapter("ReturnBook", mysqlcon);
+                            da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                            da.SelectCommand.Parameters.AddWithValue("_Title", item.Cells["Books"].Value);
+                            da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", currentuser);
+                            da.SelectCommand.ExecuteNonQuery();
                         }
                     }
+                    if (dgv_return.Rows.Count != 0) {
+                        MessageBox.Show(returnmessage);
+                    }
                     mysqlcon.Close();
-                    MessageBox.Show(endmessage + due_date);
                     dgv_borrow.Rows.Clear();
                     dgv_return.Rows.Clear();
                     Clear(grp_booklist);
@@ -472,79 +479,91 @@ namespace library_sys
         private void btn_renew_Click(object sender, EventArgs e)
         {
             int renewamount = dgv_return.SelectedRows.Count;
-            string message = "", endmessage = "", errmess = "", newdatemes = "", logoff = "";
+            string message = "", endmessage = "", errmess = "", newdatemes = "", logoff = "", errormess = "";
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
                 case "zh-HK":
+                    errormess = "請選一本書";
                     message = $"續借{renewamount}本書?";
                     logoff = "登出?";
                     newdatemes = "新還期: ";
                     endmessage = "操作完成.";
                     break;
                 case "en-US":
+                    errormess = "Please select a book";
                     message = $"Renew {renewamount} books?";
                     logoff = "Log off?";
                     newdatemes = "Due date updated to: ";
                     endmessage = "Process complete.";
                     break;
-            }      
+            }
+
+            if (renewamount != 0)
+            {
+
                 if (MessageBox.Show(message, "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                using (MySqlConnection mysqlcon = new MySqlConnection(connection))
-                {
-                    mysqlcon.Open();
-                    /*MySqlCommand cmd = new MySqlCommand("SELECT * FROM books", mysqlcon);
-                    cmd.CommandType = CommandType.Text;
-                    MySqlDataReader dr = cmd.ExecuteReader();*/
-
-                    MySqlCommand cmd = new MySqlCommand("RenewBook", mysqlcon);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    DateTime today = DateTime.Now;
-                    try
+                    using (MySqlConnection mysqlcon = new MySqlConnection(connection))
                     {
-                        foreach (DataGridViewRow listboxitems in dgv_return.SelectedRows)
-                        {
+                        mysqlcon.Open();
+                        /*MySqlCommand cmd = new MySqlCommand("SELECT * FROM books", mysqlcon);
+                        cmd.CommandType = CommandType.Text;
+                        MySqlDataReader dr = cmd.ExecuteReader();*/
 
-                            DateTime old_due = Convert.ToDateTime(listboxitems.Cells[2].Value.ToString());
-                            if ((listboxitems.Cells[1].Value.ToString() == "0") && (old_due > today.Date))
+                        MySqlCommand cmd = new MySqlCommand("RenewBook", mysqlcon);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        DateTime today = DateTime.Now;
+                        try
+                        {
+                            foreach (DataGridViewRow listboxitems in dgv_return.SelectedRows)
                             {
-                                DateTime new_due_date = DateTime.Today.AddDays(14);
-                                cmd.Parameters.AddWithValue("_New_Date", new_due_date.ToString("yyyy-MM-dd H:mm:ss"));
-                                cmd.Parameters.AddWithValue("_b_Title", listboxitems.Cells[0].Value.ToString());
-                                dgv_return.Rows.Remove(listboxitems);
-                                borrowamount -= renewamount;
-                                cmd.ExecuteNonQuery();
-                                MessageBox.Show(newdatemes + new_due_date.ToString());
-                            }
-                            else
-                            {
-                                switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+
+                                DateTime old_due = Convert.ToDateTime(listboxitems.Cells[2].Value.ToString());
+                                if ((listboxitems.Cells[1].Value.ToString() == "0") && (old_due > today.Date))
                                 {
-                                    case "zh-HK":
-                                        errmess = $"{listboxitems.ToString()} 不可續借,因為已經被更新或超過了到止日期。";
-                                        break;
-                                    case "en-US":
-                                        errmess = $"{listboxitems.ToString()} cannot be renewed as it has already been renewed or exceed due date.";
-                                        break;
+                                    DateTime new_due_date = DateTime.Today.AddDays(14);
+                                    cmd.Parameters.AddWithValue("_New_Date", new_due_date.ToString("yyyy-MM-dd H:mm:ss"));
+                                    cmd.Parameters.AddWithValue("_b_Title", listboxitems.Cells[0].Value.ToString());
+                                    dgv_return.Rows.Remove(listboxitems);
+                                    borrowamount -= renewamount;
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show(newdatemes + new_due_date.ToString());
                                 }
-                                MessageBox.Show(errmess);
+                                else
+                                {
+                                    switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
+                                    {
+                                        case "zh-HK":
+                                            errmess = $"{listboxitems.ToString()} 不可續借,因為已經被更新或超過了到止日期。";
+                                            break;
+                                        case "en-US":
+                                            errmess = $"{listboxitems.ToString()} cannot be renewed as it has already been renewed or exceed due date.";
+                                            break;
+                                    }
+                                    MessageBox.Show(errmess);
+                                }
                             }
                         }
-                    }
-                    catch (Exception ex) {
-                        MessageBox.Show(ex.Message);
-                    }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
 
 
-                    MessageBox.Show(endmessage);
-                    GridFill("BookViewAll", dgv_books);
-                    if (MessageBox.Show(logoff, "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        fm2.Show();
-                        this.Hide();
+                        MessageBox.Show(endmessage);
+                        GridFill("BookViewAll", dgv_books);
+                        if (MessageBox.Show(logoff, "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            fm2.Show();
+                            this.Hide();
+                        }
                     }
                 }
             }
+            else {
+                MessageBox.Show(errormess);
+            }
+
         }
 
         private void dgv_books_Click(object sender, EventArgs e)
@@ -559,7 +578,7 @@ namespace library_sys
 
         }
 
-        private void dgv_return_Click(object sender, EventArgs e)
+/*        private void dgv_return_Click(object sender, EventArgs e)
         {
             try
             {
@@ -580,7 +599,7 @@ namespace library_sys
                 MessageBox.Show(ex.ToString());
             }
 
-        }
+        }*/
 
         private void dgv_borrow_Click(object sender, EventArgs e)
         {
@@ -651,6 +670,29 @@ namespace library_sys
 
 
                 }
+            }
+        }
+
+        private void dgv_return_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                if (dgv_return.CurrentCell != null && dgv_return.SelectedRows[0].Cells["Books"].Value != System.DBNull.Value)
+
+                {
+                    btn_erase_ret.Visible = true;
+                    btn_renew.Visible = true;
+                }
+                else
+                {
+                    btn_erase_ret.Visible = false;
+                    btn_renew.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
