@@ -371,7 +371,7 @@ namespace library_sys
                                 da.SelectCommand.Parameters.AddWithValue("_Borrowed_by", currentuser);
                                 da.SelectCommand.Parameters.AddWithValue("_Due_Date", due_date.ToString("yyyy-MM-dd H:mm:ss"));
                                 da.SelectCommand.ExecuteNonQuery();
-                                MessageBox.Show(borrowmessage+ item.Cells["books"].Value + toreturn + due_date);
+                                MessageBox.Show(borrowmessage+ item.Cells["books"].Value + "\n" + toreturn + due_date);
                         }
 
 
@@ -430,73 +430,95 @@ namespace library_sys
         private void btn_erase_bor_Click(object sender, EventArgs e)
         {
             int delamountbor = dgv_borrow.SelectedRows.Count;
-            string message = "";
+            string message = "", errmessage = "";
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
                 case "zh-HK":
                     message = $"從借閱清單清除{delamountbor}本書?";
+                    errmessage = "請選一本書";
                     break;
                 case "en-US":
                     message = $"Delete {delamountbor} from borrow list?";
+                    errmessage = "Please select a book";
                     break;
             }
-            if (MessageBox.Show(message, "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+            if (delamountbor != 0)
             {
-                try {
-                    dgv_borrow.Rows.RemoveAt(this.dgv_borrow.SelectedRows[0].Index);
-                    borrowamount += delamountbor;
-                } catch (Exception ex)
+                if (MessageBox.Show(message, "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        dgv_borrow.Rows.RemoveAt(this.dgv_borrow.SelectedRows[0].Index);
+                        borrowamount += delamountbor;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
                 }
-                
             }
+            else {
+                MessageBox.Show(errmessage);
+            }
+
         }
 
         private void btn_erase_ret_Click(object sender, EventArgs e)
         {
             int delamountret = dgv_return.SelectedRows.Count;
-            string message = "";
+            string message = "", errmessage = "";
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
                 case "zh-HK":
-                    message = $"從借閱清單清除{delamountret}本書?";
+                    message = $"從還書清單清除{delamountret}本書?";
+                    errmessage = "請選一本書";
                     break;
                 case "en-US":
-                    message = $"Delete {delamountret} from borrow list?";
+                    message = $"Delete {delamountret} from return list?";
+                    errmessage = "Please select a book";
                     break;
             }
-            if (MessageBox.Show(message, "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (delamountret != 0)
             {
-                try {
-                    dgv_return.Rows.RemoveAt(this.dgv_return.SelectedRows[0].Index);
-                    borrowamount -= delamountret;
-                } catch (Exception ex)
+                if (MessageBox.Show(message, "Delete items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        dgv_return.Rows.RemoveAt(this.dgv_return.SelectedRows[0].Index);
+                        borrowamount -= delamountret;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
 
                 }
-                
             }
+            else {
+                MessageBox.Show(errmessage);
+            }
+
         }
 
         private void btn_renew_Click(object sender, EventArgs e)
         {
             int renewamount = dgv_return.SelectedRows.Count;
-            string renewbook = dgv_return.SelectedRows[0].Cells["Books"].Value.ToString();
+            
             string message = "", endmessage = "", errmess = "", newdatemes = "", logoff = "", errormess = "";
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
                 case "zh-HK":
                     errormess = "請選一本書";
-                    message = $"續借: {renewbook}?";
+                    message = $"續借: ";
                     logoff = "登出?";
                     newdatemes = "新還期: ";
                     endmessage = "續借完成.";
                     break;
                 case "en-US":
                     errormess = "Please select a book";
-                    message = $"Renew: {renewbook}";
+                    message = $"Renew: ";
                     logoff = "Log off?";
                     newdatemes = "Due date updated to: ";
                     endmessage = "Renewal complete.";
@@ -505,7 +527,8 @@ namespace library_sys
 
             if (renewamount != 0)
             {
-
+                string renewbook = dgv_return.SelectedRows[0].Cells["Books"].Value.ToString();
+                message += renewbook + " ?";
                 if (MessageBox.Show(message, "Renew items", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     using (MySqlConnection mysqlcon = new MySqlConnection(connection))
