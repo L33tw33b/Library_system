@@ -55,6 +55,7 @@ namespace library_sys
                         row.DefaultCellStyle.BackColor = Color.Yellow;
                     }
                 }
+
             }
         }
 
@@ -79,6 +80,13 @@ namespace library_sys
                 control.Columns[11].Visible = false;
                 control.Columns[12].Visible = false;
                 control.Columns[13].Visible = false;
+                foreach (DataGridViewRow row in dgv_books.Rows)
+                {
+                    if (row.Cells[11].Value != System.DBNull.Value)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                }
                 mysqlcon.Close();
             }
         }
@@ -137,8 +145,8 @@ namespace library_sys
 
             }
 
-                if (adminval == 0) {
-                btn_admin.Visible = false;
+            if (adminval == 0) {
+            btn_admin.Visible = false;
             }
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag) {
                 case "zh-HK": MessageBox.Show($"你可借 {borrowamount} 本書.");
@@ -161,11 +169,6 @@ namespace library_sys
             dgv_return.Columns[2].Name = "Due Date";
             dgv_record.Columns[0].Name = "Books";
             dgv_record.Columns[1].Name = "Due Date";
-            foreach (DataGridViewRow row in dgv_books.Rows) {
-                if (row.Cells[11].Value != System.DBNull.Value) {
-                    row.DefaultCellStyle.BackColor = Color.Red;
-                }
-            }
 
         }
 
@@ -207,8 +210,8 @@ namespace library_sys
                    
                         mysqlcon.Open();
                         String command = "SELECT * FROM books WHERE b_Barcode = @barcode;";
-                        int dgvborrow_rows = dgv_borrow.Rows.Count - 1;
-                        int dgvreturn_rows = dgv_return.Rows.Count - 1;
+                        int dgvborrow_rows = dgv_borrow.Rows.Count;
+                        int dgvreturn_rows = dgv_return.Rows.Count;
                         bool exist = false;
                         MySqlCommand cmd = new MySqlCommand(command, mysqlcon);
                         cmd.Parameters.AddWithValue("@barcode", txt_barcode.Text);
@@ -229,6 +232,7 @@ namespace library_sys
                         }
                         else
                         {
+                            
                             for (int i = 0; i < dgvborrow_rows; i++)
                             {
                                 if (dgv_borrow.Rows[i].Cells[0].Value.Equals(dr["b_Title"])) { exist = true; }
@@ -479,22 +483,23 @@ namespace library_sys
         private void btn_renew_Click(object sender, EventArgs e)
         {
             int renewamount = dgv_return.SelectedRows.Count;
+            string renewbook = dgv_return.SelectedRows[0].Cells["Books"].Value.ToString();
             string message = "", endmessage = "", errmess = "", newdatemes = "", logoff = "", errormess = "";
             switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
             {
                 case "zh-HK":
                     errormess = "請選一本書";
-                    message = $"續借{renewamount}本書?";
+                    message = $"續借: {renewbook}?";
                     logoff = "登出?";
                     newdatemes = "新還期: ";
-                    endmessage = "操作完成.";
+                    endmessage = "續借完成.";
                     break;
                 case "en-US":
                     errormess = "Please select a book";
-                    message = $"Renew {renewamount} books?";
+                    message = $"Renew: {renewbook}";
                     logoff = "Log off?";
                     newdatemes = "Due date updated to: ";
-                    endmessage = "Process complete.";
+                    endmessage = "Renewal complete.";
                     break;
             }
 
@@ -528,16 +533,17 @@ namespace library_sys
                                     borrowamount -= renewamount;
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show(newdatemes + new_due_date.ToString());
+                                    MessageBox.Show(endmessage);
                                 }
                                 else
                                 {
                                     switch (Thread.CurrentThread.CurrentUICulture.IetfLanguageTag)
                                     {
                                         case "zh-HK":
-                                            errmess = $"{listboxitems.ToString()} 不可續借,因為已經被更新或超過了到止日期。";
+                                            errmess = $"{renewbook} 不可續借,因為已經被更新或超過了到止日期。";
                                             break;
                                         case "en-US":
-                                            errmess = $"{listboxitems.ToString()} cannot be renewed as it has already been renewed or exceed due date.";
+                                            errmess = $"{renewbook} cannot be renewed as it has already been renewed or exceed due date.";
                                             break;
                                     }
                                     MessageBox.Show(errmess);
@@ -550,7 +556,7 @@ namespace library_sys
                         }
 
 
-                        MessageBox.Show(endmessage);
+
                         GridFill("BookViewAll", dgv_books);
                         if (MessageBox.Show(logoff, "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
